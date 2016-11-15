@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/blockCell"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/mainmotorblcok"
+        android:id="@+id/blockImageView" />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/mainmotorblcok"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/blockImageView"
+        android:id="@+id/optionImageView" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/blockImageView"
+        android:layout_toEndOf="@+id/blockImageView"
+        android:id="@+id/timeTextView" />
+
+</RelativeLayout>
