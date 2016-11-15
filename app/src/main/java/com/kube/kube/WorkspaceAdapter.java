@@ -120,6 +120,7 @@ public class WorkspaceAdapter extends BaseAdapter {
                     Log.d("DragClickListener", "ACTION_DOP");
                     dropPos = (int) currentView.getTag();
                     setBlock(dropPos);
+                    notifyDataSetChanged();
                     break;
 
                 case DragEvent.ACTION_DRAG_ENDED:
