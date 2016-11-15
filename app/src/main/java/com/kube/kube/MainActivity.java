@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     private final class myLongClickListener implements View.OnLongClickListener {
 
         @Override
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
             mWorkspaceAdapter.setCurBlock(curBlock);
             Log.d("curBlock", ""+curBlock +"    "+R.drawable.whileblock);
+
             return true;
         }
 
