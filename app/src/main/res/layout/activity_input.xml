@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#859871"
+    android:id="@+id/activity_input"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="6">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ultrasonic"
+        android:id="@+id/optionImageView"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:textSize="15dp"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/NumEditText"
+        android:layout_gravity="center"
+        android:layout_weight="2" />
+
+    <TextView
+        android:text="초"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="5dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/UnitTextView"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+
+    <Button
+        android:text="입력"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/saveButton"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+
+    <Button
+        android:text="취소"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:id="@+id/CancelButton"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+</LinearLayout>

@@ -1,7 +1,6 @@
 package com.kube.kube;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -9,44 +8,46 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by jutan on 2016-11-14.
+ * Created by jutan on 2016-11-17.
  */
-
-public class WorkspaceAdapter extends BaseAdapter {
-    private ArrayList<WorkspaceItem> workspaceItems;
-    private Context mContext;
-    int dropPos;
+public class WorkspaceAdapter extends BaseAdapter{
+    Context mContext;
+    ArrayList<WorkspaceItem> BlockList;
+    int dorPos;
     int curBlock;
 
-    public void setCurBlock(int curBlock) {
-        this.curBlock = curBlock;
-    }
-
-    public WorkspaceAdapter (Context context){
+    public WorkspaceAdapter(Context context) {
         mContext = context;
-        workspaceItems = new ArrayList<WorkspaceItem>();
-        for(int i = 0; i < 75;i++){
+        BlockList = new ArrayList<WorkspaceItem>();
+        for(int i =0; i<75; i++){
             WorkspaceItem newItem = new WorkspaceItem();
             newItem.setBlockImage(R.drawable.empty);
             newItem.setOptionImage(R.drawable.empty);
-            newItem.setTimeOption("0초");
-            workspaceItems.add(newItem);
+            newItem.setTimeOption("");
+            BlockList.add(newItem);
         }
+    }
+
+    public void setCurBlock(int block){
+        curBlock = block;
     }
 
     @Override
     public int getCount() {
-        return workspaceItems.size();
+        return BlockList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return workspaceItems.get(position);
+        return BlockList.get(position);
     }
 
     @Override
@@ -56,83 +57,72 @@ public class WorkspaceAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View grid;
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        Context context = parent.getContext();
         if(convertView == null){
-            grid = new View(mContext);
-            grid = inflater.inflate(R.layout.blockitemlayout, null);
-            grid.setOnDragListener(new myDragListener());
-            grid.setTag(position);
-
-            ImageView blockImage = (ImageView) grid.findViewById(R.id.blockImageView);
-            ImageView optionImage = (ImageView) grid.findViewById(R.id.optionImageView);
-            TextView timeOptionText = (TextView) grid.findViewById(R.id.timeTextView);
-
-            blockImage.setImageResource(workspaceItems.get(position).blockImage);
-            optionImage.setImageResource(workspaceItems.get(position).optionImage);
-            timeOptionText.setText(workspaceItems.get(position).timeOption);
-
-
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.blockitemlayout, parent, false);
         }
-        else{
-            grid = (View) convertView;
-        }
+        convertView.setTag(position);
+        convertView.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
 
-        return grid;
-    }
+                switch (event.getAction()) {
 
-    public void setBlock(int position){
-        workspaceItems.get(position).setBlockImage(curBlock);
-        Log.d("workspaceItems", "postion :" +position+ "item" + workspaceItems.get(position).getBlockImage() +"   "+curBlock );
-        this.notifyDataSetChanged();
-    }
+                    // 이미지를 드래그 시작될때
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        Log.d("DragClickListener", "ACTION_DRAG_STARTED");
 
-    class myDragListener implements View.OnDragListener {
+                        break;
 
+                    // 드래그한 이미지를 옮길려는 지역으로 들어왔을때
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        Log.d("DragClickListener", "ACTION_DRAG_ENTERED");
 
-        public boolean onDrag(View currentView, DragEvent event) {
+                        break;
 
-            View saveView;
-            // 이벤트 시작
-            switch (event.getAction()) {
+                    // 드래그한 이미지가 영역을 빠져 나갈때
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        Log.d("DragClickListener", "ACTION_DRAG_EXITED");
+                        break;
 
-                // 이미지를 드래그 시작될때
-                case DragEvent.ACTION_DRAG_STARTED:
-                    Log.d("DragClickListener", "ACTION_DRAG_STARTED");
-                    saveView = (View) event.getLocalState();
-                    break;
+                    // 이미지를 드래그해서 드랍시켰을때
+                    case DragEvent.ACTION_DROP:
+                        Log.d("DragClickListener", "ACTION_DROP");
+                        dorPos = (int) v.getTag();
+                        BlockList.get(dorPos).setBlockImage(curBlock);
+                        Log.d("DragListener" , ""+dorPos +"         "+ BlockList.get(dorPos).blockImage);
+                        notifyDataSetChanged();
+                        break;
+                }
 
-                // 드래그한 이미지를 옮길려는 지역으로 들어왔을때
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    Log.d("DragClickListener", "ACTION_DRAG_ENTERED");
-                    // 이미지가 들어왔다는 것을 알려주기 위해 배경이미지 변경
-//                    currentView.setBackground(targetShape);
-                    break;
-
-                // 드래그한 이미지가 영역을 빠져 나갈때
-                case DragEvent.ACTION_DRAG_EXITED:
-                    Log.d("DragClickListener", "ACTION_DRAG_EXITED");
-//                    currentView.setBackground(normalShape);
-                    break;
-
-                // 이미지를 드래그해서 드랍시켰을때
-                case DragEvent.ACTION_DROP:
-                    Log.d("DragClickListener", "ACTION_DOP");
-                    dropPos = (int) currentView.getTag();
-                    setBlock(dropPos);
-                    notifyDataSetChanged();
-                    break;
-
-                case DragEvent.ACTION_DRAG_ENDED:
-                    Log.d("DragClickListener", "ACTION_DRAG_ENDED");
-//                    v.setBackground(normalShape); // go back to normal shape
-                    break;
-
-                default:
-                    break;
+                return true;
             }
-            return true;
+        });
+        ImageView blockImage = (ImageView) convertView.findViewById(R.id.blockImageView);
+        ImageView optionImage = (ImageView) convertView.findViewById(R.id.optionImageView);
+        TextView timeText = (TextView) convertView.findViewById(R.id.timeTextView);
+
+        blockImage.setOnClickListener(new blockClickListener());
+
+        blockImage.setImageResource(BlockList.get(position).getBlockImage());
+        optionImage.setImageResource(BlockList.get(position).getOptionImage());
+        timeText.setText(BlockList.get(position).getTimeOption());
+
+        return convertView;
+    }
+
+    public class blockClickListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View v) {
+
         }
     }
 
+    public void setOption(int block, String time, int position){
+        BlockList.get(position).setOptionImage(block);
+        BlockList.get(position).setTimeOption(time);
+        notifyDataSetChanged();
+    }
 }

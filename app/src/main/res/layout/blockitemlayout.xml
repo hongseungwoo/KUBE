@@ -10,12 +10,14 @@
     <ImageView
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_margin="1dp"
         android:src="@drawable/mainmotorblcok"
         android:id="@+id/blockImageView" />
 
     <ImageView
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_margin="1dp"
         android:src="@drawable/mainmotorblcok"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/blockImageView"
@@ -23,10 +25,12 @@
 
     <TextView
         android:text="TextView"
+        android:textSize="10dp"
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:layout_alignBottom="@+id/blockImageView"
         android:layout_toEndOf="@+id/blockImageView"
+        android:gravity="center"
         android:id="@+id/timeTextView" />
 
 </RelativeLayout>
