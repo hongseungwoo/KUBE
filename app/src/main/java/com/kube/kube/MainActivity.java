@@ -128,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
                 image = R.drawable.violet;
                 break;
             case "RIGHT":
-                curBlock = R.drawable.right;
+                image = R.drawable.right;
                 break;
             case "LEFT":
-                curBlock = R.drawable.left;
+                image = R.drawable.left;
                 break;
         }
         return image;
