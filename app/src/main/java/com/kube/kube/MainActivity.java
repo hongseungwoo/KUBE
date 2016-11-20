@@ -127,6 +127,12 @@ public class MainActivity extends AppCompatActivity {
             case "VIOLET":
                 image = R.drawable.violet;
                 break;
+            case "RIGHT":
+                curBlock = R.drawable.right;
+                break;
+            case "LEFT":
+                curBlock = R.drawable.left;
+                break;
         }
         return image;
     }
@@ -171,12 +177,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case "sleep":
                     curBlock = R.drawable.sleep;
-                    break;
-                case "RIGHT":
-                    curBlock = R.drawable.right;
-                    break;
-                case "LEFT":
-                    curBlock = R.drawable.left;
                     break;
             }
             mWorkspaceAdapter.setCurBlock(curBlock);
