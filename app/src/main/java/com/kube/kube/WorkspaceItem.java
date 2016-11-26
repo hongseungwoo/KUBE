@@ -7,7 +7,15 @@ package com.kube.kube;
 public class WorkspaceItem {
     int blockImage;
     int optionImage;
+    String moduleNum;
     String timeOption;
+    public String getModuleNum() {
+        return moduleNum;
+    }
+
+    public void setModuleNum(String moduleNum) {
+        this.moduleNum = moduleNum;
+    }
 
     public int getBlockImage() {
         return blockImage;

@@ -94,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private int getBlockIamge(String optionBlock) {
+    private int getBlockIamge(String Block) {
         int image = R.drawable.empty;
-        switch (optionBlock){
+        switch (Block){
             case "EMPTY":
                 image = R.drawable.empty;
                 break;
@@ -153,32 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     v, // 드래그 드랍할  Vew
                     0 // 필요없은 플래그
             );
-            switch((String)v.getTag()){
-                case "while":
-                    curBlock = R.drawable.whileblock;
-                    break;
-                case "whileEnd":
-                    curBlock = R.drawable.whileendblock;
-                    break;
-                case "if":
-                    curBlock = R.drawable.ifblock;
-                    break;
-                case "ifEnd":
-                    curBlock = R.drawable.ifendblock;
-                    break;
-                case "main":
-                    curBlock = R.drawable.mainmotorblcok;
-                    break;
-                case "sub":
-                    curBlock = R.drawable.submotorblcok;
-                    break;
-                case "led":
-                    curBlock = R.drawable.ledblock;
-                    break;
-                case "sleep":
-                    curBlock = R.drawable.sleep;
-                    break;
-            }
+            curBlock = getBlockIamge((String)v.getTag());
             mWorkspaceAdapter.setCurBlock(curBlock);
 
             return true;

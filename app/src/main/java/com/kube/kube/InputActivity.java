@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class InputActivity extends Activity {
+public class    InputActivity extends Activity {
     int image=0;
 
     @Override
@@ -27,11 +27,12 @@ public class InputActivity extends Activity {
         Intent getIntent = getIntent();
         int curBlock = getIntent.getIntExtra("Block", 0);
 
-
-
+        
         final ImageView blockImg = (ImageView)findViewById(R.id.optionImageView);
+        final ImageView inequalImg = (ImageView)findViewById(R.id.inequalityImageView);
         final EditText numEdit = (EditText)findViewById(R.id.NumEditText);
         final TextView unitText = (TextView)findViewById(R.id.UnitTextView);
+
         Button saveBtn = (Button)findViewById(R.id.saveButton);
         Button cancelBtn = (Button) findViewById(R.id.CancelButton);
 
@@ -40,13 +41,13 @@ public class InputActivity extends Activity {
                blockImg.setImageResource(R.drawable.empty);
                blockImg.setTag("EMPTY");
                blockImg.setVisibility(View.INVISIBLE);
+               inequalImg.setVisibility(View.INVISIBLE);
+               numEdit.setHint("0-100");
                unitText.setText("초");
                break;
            case R.drawable.submotorblcok:
-           case R.drawable.mainmotorblcok:
                blockImg.setImageResource(R.drawable.right);
                blockImg.setTag("RIGHT");
-               unitText.setText("초");
                blockImg.setOnClickListener(new View.OnClickListener() {
                    @Override
                    public void onClick(View v) {
@@ -63,6 +64,33 @@ public class InputActivity extends Activity {
                        }
                    }
                });
+               inequalImg.setVisibility(View.INVISIBLE);
+               unitText.setText("도");
+               numEdit.setHint("각도 0-100");
+
+               break;
+           case R.drawable.mainmotorblcok:
+               blockImg.setImageResource(R.drawable.right);
+               blockImg.setTag("RIGHT");
+               unitText.setVisibility(View.INVISIBLE);
+               numEdit.setHint("회전 속도 0-100");
+               blockImg.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       image++;
+                       switch (image%2){
+                           case 0 :
+                               blockImg.setImageResource(R.drawable.right);
+                               blockImg.setTag("RIGHT");
+                               break;
+                           case 1:
+                               blockImg.setImageResource(R.drawable.left);
+                               blockImg.setTag("LEFT");
+                               break;
+                       }
+                   }
+               });
+               inequalImg.setVisibility(View.INVISIBLE);
                break;
            case R.drawable.ledblock:
                blockImg.setTag("RED");
@@ -103,7 +131,9 @@ public class InputActivity extends Activity {
                        }
                    }
                });
-               unitText.setText("초");
+               inequalImg.setVisibility(View.INVISIBLE);
+               unitText.setVisibility(View.INVISIBLE);
+               numEdit.setHint("밝기 0-100");
                break;
            case R.drawable.whileblock:
            case R.drawable.ifblock:
@@ -125,6 +155,7 @@ public class InputActivity extends Activity {
 
                    }
                });
+
                unitText.setText("m");
                break;
        }
@@ -138,10 +169,7 @@ public class InputActivity extends Activity {
                 intent.putExtra("optionBlock", optionBlcok);
                 intent.putExtra("optionText", optionText);
                 setResult(RESULT_OK, intent);
-
                 finish();
-
-
             }
         });
 

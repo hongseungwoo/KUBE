@@ -31,6 +31,7 @@ public class WorkspaceAdapter extends BaseAdapter{
             WorkspaceItem newItem = new WorkspaceItem();
             newItem.setBlockImage(R.drawable.empty);
             newItem.setOptionImage(R.drawable.empty);
+            newItem.setModuleNum("");
             newItem.setTimeOption("");
             BlockList.add(newItem);
         }
