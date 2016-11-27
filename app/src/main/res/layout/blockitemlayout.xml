@@ -25,8 +25,7 @@
         android:layout_width="10dp"/>
 
     <TextView
-        android:id="@+id/optionNumTextView"
-        android:layout_width="10dp"
+        android:id="@+id/numOptionTextView"
         android:textSize="10dp"/>
 
 

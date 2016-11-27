@@ -103,7 +103,7 @@ public class WorkspaceAdapter extends BaseAdapter{
         ImageView blockImage = (ImageView) convertView.findViewById(R.id.blockImageView);
         ImageView optionImage = (ImageView) convertView.findViewById(R.id.optionImageView);
         TextView moduleNumText = (TextView)convertView.findViewById(R.id.moduleNumText);
-        TextView numOptionText = (TextView) convertView.findViewById(R.id.optionNumTextView);
+        TextView numOptionText = (TextView) convertView.findViewById(R.id.numOptionTextView);
 
         blockImage.setOnClickListener(new blockClickListener());
 
@@ -126,6 +126,7 @@ public class WorkspaceAdapter extends BaseAdapter{
         BlockList.get(position).setOptionImage(block);
         BlockList.get(position).setNumOption(optionNum);
         BlockList.get(position).setModuleNum(moduleNum);
+        Log.d("입력된 블락 옵션들 ", ""+BlockList.get(position).getOptionImage()+BlockList.get(position).getModuleNum()+BlockList.get(position).getNumOption());
         notifyDataSetChanged();
     }
 }
