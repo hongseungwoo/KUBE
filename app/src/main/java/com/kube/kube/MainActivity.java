@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -87,69 +89,92 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String makeTransStr(){
-        String transStr = null;
-        ArrayList<WorkspaceItem> blockList = mWorkspaceAdapter.BlockList;
-        int position = 0;
-        for(int i = 0;i < blockList.size();i++){
-            int block = blockList.get(i).getBlockImage();
-            if(block == R.drawable.start)
-                position = i+1;
+    private void addOptionMenuItems(Menu menu) {
+        menu.clear();
+        menu.add(R.id.trans, R.id.trans, Menu.NONE, "전송");
+    }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        addOptionMenuItems(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.trans:
+                String trans = makeTransStr(0);
+                Log.d("전송문", ""+trans);
+                return true;
+            default:
+                break;
         }
-        for(int i = position;i<blockList.size();i+=5){
+        return false;
+    }
+    public String makeTransStr(int start){
+        String transStr = "";
+        ArrayList<WorkspaceItem> blockList = mWorkspaceAdapter.BlockList;
+        for(int i = start;i < blockList.size();i+=5){
             int block = blockList.get(i).getBlockImage();
-            if(block != R.drawable.empty){
-                switch (block) {
-                    case R.drawable.whileblock:
-                        transStr += "[WHILE](";
-                        if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
-                            transStr += "[IR]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
-                        } else {
-                            transStr += "[US]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
-                        }
-                        position++;
-                        break;
-                    case R.drawable.whileendblock:
-                        transStr += "}";
-                        break;
-                    case R.drawable.ifblock:
-                        transStr += "[IF]{";
-                        if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
-                            transStr += "[IR]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
-                        } else {
-                            transStr += "[US]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
-                        }
-                        position++;
-                        break;
-                    case R.drawable.ifendblock:
-                        transStr += "}";
-                        break;
-                    case R.drawable.mainmotorblcok:
-                        transStr += "[DC]" + blockList.get(i).getModuleNum() + "(";
-                        if (blockList.get(i).optionImage == R.drawable.right)
-                            transStr += "000," + blockList.get(i).getNumOption() + ")";
-                        else
-                            transStr += "001," + blockList.get(i).getNumOption() + ")";
-                        break;
-                    case R.drawable.submotorblcok:
-                        transStr += "[SM]" + blockList.get(i).getModuleNum() + "(" + blockList.get(i).getNumOption() + ")";
-                        break;
-                    case R.drawable.ledblock:
-                        transStr += "[LD]" + blockList.get(i).getModuleNum() + "(";
-                        if (blockList.get(i).optionImage == R.drawable.red) {
-                            transStr += "R," + blockList.get(i).getNumOption() + ")";
-                        } else if (blockList.get(i).optionImage == R.drawable.green) {
-                            transStr += "G," + blockList.get(i).getNumOption() + ")";
-                        } else if (blockList.get(i).optionImage == R.drawable.blue) {
-                            transStr += "B," + blockList.get(i).getNumOption() + ")";
-                        } else if (blockList.get(i).optionImage == R.drawable.yellow) {
-                            transStr += "Y," + blockList.get(i).getNumOption() + ")";
-                        } else if (blockList.get(i).optionImage == R.drawable.violet) {
-                            transStr += "P," + blockList.get(i).getNumOption() + ")";
-                        }
-                        break;
+            switch (block) {
+                case R.drawable.start:
+                    start = i+1;
+                    transStr+=makeTransStr(start);
+                    break;
+
+                case R.drawable.whileblock:
+                    transStr += "[WHILE](";
+                    if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
+                        transStr += "[IR" + blockList.get(i).getModuleNum() + "]()" + blockList.get(i).getNumOption() + "){";
+                    } else {
+                        transStr += "[US" + blockList.get(i).getModuleNum() + "]()" + blockList.get(i).getNumOption() + "){";
                     }
+                    start = i+1;
+                    transStr+=makeTransStr(start);
+                    break;
+                case R.drawable.whileendblock:
+                    transStr += "}";
+                    break;
+                case R.drawable.ifblock:
+                    transStr += "[IF]{";
+                    if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
+                        transStr += "[IR" + blockList.get(i).getModuleNum() + "]()" + blockList.get(i).getNumOption() + "){";
+                    } else {
+                        transStr += "[US" + blockList.get(i).getModuleNum() + "]()" + blockList.get(i).getNumOption() + "){";
+                    }
+                    start = i+1;
+                    transStr+=makeTransStr(start);
+                    break;
+                case R.drawable.ifendblock:
+                    transStr += "}";
+                    break;
+                case R.drawable.mainmotorblcok:
+                    transStr += "[DC" + blockList.get(i).getModuleNum() + "](";
+                    if (blockList.get(i).optionImage == R.drawable.right)
+                        transStr += "000," + blockList.get(i).getNumOption() + ")";
+                    else
+                        transStr += "001," + blockList.get(i).getNumOption() + ")";
+                    break;
+                case R.drawable.submotorblcok:
+                    transStr += "[SM" + blockList.get(i).getModuleNum() + "](" + blockList.get(i).getNumOption() + ")";
+                    break;
+                case R.drawable.ledblock:
+                    transStr += "[LD" + blockList.get(i).getModuleNum() + "](";
+                    if (blockList.get(i).optionImage == R.drawable.red) {
+                        transStr += "R," + blockList.get(i).getNumOption() + ")";
+                    } else if (blockList.get(i).optionImage == R.drawable.green) {
+                        transStr += "G," + blockList.get(i).getNumOption() + ")";
+                    } else if (blockList.get(i).optionImage == R.drawable.blue) {
+                        transStr += "B," + blockList.get(i).getNumOption() + ")";
+                    } else if (blockList.get(i).optionImage == R.drawable.yellow) {
+                        transStr += "Y," + blockList.get(i).getNumOption() + ")";
+                    } else if (blockList.get(i).optionImage == R.drawable.violet) {
+                        transStr += "P," + blockList.get(i).getNumOption() + ")";
+                    } else if (blockList.get(i).optionImage == R.drawable.sky) {
+                        transStr += "S," + blockList.get(i).getNumOption() + ")";
+                    }
+                    break;
                 }
             }
         return transStr;
@@ -184,8 +209,8 @@ public class MainActivity extends AppCompatActivity {
             case "RED":
                 image = R.drawable.red;
                 break;
-            case "ORANGE":
-                image = R.drawable.orange;
+            case "SKY":
+                image = R.drawable.sky;
                 break;
             case "YELLOW":
                 image = R.drawable.yellow;
@@ -195,9 +220,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "BLUE":
                 image = R.drawable.blue;
-                break;
-            case "BV":
-                image = R.drawable.bluishviolet;
                 break;
             case "VIOLET":
                 image = R.drawable.violet;

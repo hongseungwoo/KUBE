@@ -37,7 +37,7 @@ public class WorkspaceItem {
         return numOption;
     }
 
-    public void setNumOption(String timeOption) {
+    public void setNumOption(String numOption) {
         this.numOption = numOption;
     }
 }

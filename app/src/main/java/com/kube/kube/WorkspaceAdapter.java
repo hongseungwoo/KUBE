@@ -100,12 +100,13 @@ public class WorkspaceAdapter extends BaseAdapter{
                 return true;
             }
         });
+
         ImageView blockImage = (ImageView) convertView.findViewById(R.id.blockImageView);
         ImageView optionImage = (ImageView) convertView.findViewById(R.id.optionImageView);
         TextView moduleNumText = (TextView)convertView.findViewById(R.id.moduleNumText);
         TextView numOptionText = (TextView) convertView.findViewById(R.id.numOptionTextView);
 
-        blockImage.setOnClickListener(new blockClickListener());
+
 
         blockImage.setImageResource(BlockList.get(position).getBlockImage());
         optionImage.setImageResource(BlockList.get(position).getOptionImage());
@@ -114,18 +115,11 @@ public class WorkspaceAdapter extends BaseAdapter{
         return convertView;
     }
 
-    public class blockClickListener implements View.OnClickListener{
-
-        @Override
-        public void onClick(View v) {
-
-        }
-    }
 
     public void setOption(int block, String optionNum, String moduleNum, int position){
         BlockList.get(position).setOptionImage(block);
         BlockList.get(position).setNumOption(optionNum);
-        BlockList.get(position).setModuleNum(moduleNum);
+        BlockList.get(position).setModuleNum("No."+moduleNum);
         Log.d("입력된 블락 옵션들 ", ""+BlockList.get(position).getOptionImage()+BlockList.get(position).getModuleNum()+BlockList.get(position).getNumOption());
         notifyDataSetChanged();
     }

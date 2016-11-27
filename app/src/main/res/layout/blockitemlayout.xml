@@ -10,23 +10,25 @@
 
     <ImageView
         android:id="@+id/blockImageView"
-        android:layout_height="30dp"
-        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
         android:layout_columnSpan="3"
         android:layout_rowSpan="3"/>
 
     <TextView
         android:id="@+id/moduleNumText"
-        android:textSize="5dp"/>
+        android:textSize="10dp"
+        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/optionImageView"
-        android:layout_height="10dp"
-        android:layout_width="10dp"/>
+        android:layout_height="20dp"
+        android:layout_width="20dp"/>
 
     <TextView
         android:id="@+id/numOptionTextView"
-        android:textSize="10dp"/>
+        android:textSize="10dp"
+        android:gravity="center"/>
 
 
 </GridLayout>

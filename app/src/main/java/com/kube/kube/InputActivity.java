@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class    InputActivity extends Activity {
     int image=0;
+    int inequalImage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class    InputActivity extends Activity {
         final TextView unitText = (TextView)findViewById(R.id.unitTextView);
         final EditText moduleEdit = (EditText)findViewById(R.id.moduleNumEditTextView);
 
+        inequalImg.setTag("");
         Button saveBtn = (Button)findViewById(R.id.saveButton);
         Button cancelBtn = (Button) findViewById(R.id.cancelButton);
 
@@ -101,14 +103,14 @@ public class    InputActivity extends Activity {
                    @Override
                    public void onClick(View v) {
                        image++;
-                       switch (image%7){
+                       switch (image%6){
                            case 0:
                                blockImg.setImageResource(R.drawable.red);
                                blockImg.setTag("RED");
                                break;
                            case 1:
-                               blockImg.setImageResource(R.drawable.orange);
-                               blockImg.setTag("ORANGE");
+                               blockImg.setImageResource(R.drawable.sky);
+                               blockImg.setTag("SKY");
                                break;
                            case 2:
                                blockImg.setImageResource(R.drawable.yellow);
@@ -123,10 +125,6 @@ public class    InputActivity extends Activity {
                                blockImg.setTag("BLUE");
                                break;
                            case 5:
-                               blockImg.setImageResource(R.drawable.bluishviolet);
-                               blockImg.setTag("BV");
-                               break;
-                           case 6:
                                blockImg.setImageResource(R.drawable.violet);
                                blockImg.setTag("VIOLET");
                                break;
@@ -158,13 +156,30 @@ public class    InputActivity extends Activity {
                    }
                });
                unitText.setText("m");
+               inequalImg.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       inequalImage++;
+                       switch (inequalImage%2){
+                           case 0:
+                               inequalImg.setImageResource(R.drawable.more);
+                               inequalImg.setTag(">>");
+                               break;
+                           case 1:
+                               inequalImg.setImageResource(R.drawable.less);
+                               inequalImg.setTag("<<");
+                               break;
+                       }
+
+                   }
+               });
                break;
        }
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String optionBlcok = (String) blockImg.getTag();
-                String numOption = numEdit.getText().toString();
+                String numOption = (String)inequalImg.getTag() + numEdit.getText().toString();
                 String moduleNum = moduleEdit.getText().toString();
 
                 Intent intent = new Intent();
