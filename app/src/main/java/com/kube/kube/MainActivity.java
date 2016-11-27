@@ -77,13 +77,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int clickBlock = mWorkspaceAdapter.BlockList.get(position).blockImage;
-                if(clickBlock != R.drawable.empty){
+                if(clickBlock == R.drawable.whileblock
+                        || clickBlock == R.drawable.ifblock
+                        ||clickBlock == R.drawable.submotorblcok
+                        ||clickBlock == R.drawable.mainmotorblcok
+                        ||clickBlock == R.drawable.ledblock){
                     curPos = position;
                     Log.d("clickBlock", "     "+clickBlock+"    "+curPos);
                     Intent OptionIntent = new Intent(MainActivity.this, InputActivity.class);
                     OptionIntent.putExtra("Block", clickBlock);
                     startActivityForResult(OptionIntent, REQUEST_CODE_OPTION_INPUT);
                 }
+            }
+        });
+        workspace.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                mWorkspaceAdapter.BlockList.get(position).setModuleNum("");
+                mWorkspaceAdapter.BlockList.get(position).setOptionImage(R.drawable.empty);
+                mWorkspaceAdapter.BlockList.get(position).setBlockImage(R.drawable.empty);
+                mWorkspaceAdapter.BlockList.get(position).setNumOption("");
+                mWorkspaceAdapter.notifyDataSetChanged();
+                return false;
             }
         });
 

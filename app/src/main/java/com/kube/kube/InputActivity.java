@@ -137,6 +137,7 @@ public class    InputActivity extends Activity {
                break;
            case R.drawable.whileblock:
            case R.drawable.ifblock:
+               inequalImg.setTag(">");
                blockImg.setTag("ULTRA");
                blockImg.setOnClickListener(new View.OnClickListener() {
                    @Override
