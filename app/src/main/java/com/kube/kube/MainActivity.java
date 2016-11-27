@@ -11,9 +11,13 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
+    ImageView startBlockImage;
+    ImageView endBlockImage;
     ImageView whileBlockImage;
     ImageView whileEndBlockImage;
     ImageView ifBlockImage;
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startBlockImage = (ImageView) findViewById(R.id.startBlock);
+        endBlockImage = (ImageView)findViewById(R.id.endBlock);
         whileBlockImage = (ImageView) findViewById(R.id.whileBlock);
         whileEndBlockImage = (ImageView) findViewById(R.id.whileEndBlock);
         ifBlockImage = (ImageView) findViewById(R.id.ifBlock);
@@ -43,24 +50,23 @@ public class MainActivity extends AppCompatActivity {
         ledBlockImage = (ImageView) findViewById(R.id.ledBlock);
         sleepBlockImage = (ImageView) findViewById(R.id.sleepBlock);
 
-        whileBlockImage.setTag("while");
-        whileEndBlockImage.setTag("whileEnd");
-        ifBlockImage.setTag("if");
-        ifEndBlockImage.setTag("ifEnd");
-        mainMotorBlockImage.setTag("main");
-        subMotorBlockImage.setTag("sub");
-        ledBlockImage.setTag("led");
-        sleepBlockImage.setTag("sleep");
+        startBlockImage.setTag("START");
+        endBlockImage.setTag("END");
+        whileBlockImage.setTag("WHILE");
+        whileEndBlockImage.setTag("WHILEEND");
+        ifBlockImage.setTag("IF");
+        ifEndBlockImage.setTag("IFEND");
+        mainMotorBlockImage.setTag("MAIN");
+        subMotorBlockImage.setTag("SUB");
+        ledBlockImage.setTag("LED");
+        sleepBlockImage.setTag("SLEEP");
 
+        ImageView blockImages [] = {startBlockImage, endBlockImage,whileBlockImage,whileEndBlockImage,
+                ifBlockImage,ifEndBlockImage,mainMotorBlockImage,subMotorBlockImage,ledBlockImage,sleepBlockImage};
 
-        whileBlockImage.setOnLongClickListener(new myLongClickListener());
-        whileEndBlockImage.setOnLongClickListener(new myLongClickListener());
-        ifBlockImage.setOnLongClickListener(new myLongClickListener());
-        ifEndBlockImage.setOnLongClickListener(new myLongClickListener());
-        mainMotorBlockImage.setOnLongClickListener(new myLongClickListener());
-        subMotorBlockImage.setOnLongClickListener(new myLongClickListener());
-        ledBlockImage.setOnLongClickListener(new myLongClickListener());
-        sleepBlockImage.setOnLongClickListener(new myLongClickListener());
+        for(int i = 0 ; i < blockImages.length; i++){
+            blockImages[i].setOnLongClickListener(new myLongClickListener());
+        }
 
         final GridView workspace = (GridView) findViewById(R.id.workSpace);
         mWorkspaceAdapter = new WorkspaceAdapter(MainActivity.this);
@@ -81,15 +87,84 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public String makeTransStr(){
+        String transStr = null;
+        ArrayList<WorkspaceItem> blockList = mWorkspaceAdapter.BlockList;
+        int position = 0;
+        for(int i = 0;i < blockList.size();i++){
+            int block = blockList.get(i).getBlockImage();
+            if(block == R.drawable.start)
+                position = i+1;
+
+        }
+        for(int i = position;i<blockList.size();i+=5){
+            int block = blockList.get(i).getBlockImage();
+            if(block != R.drawable.empty){
+                switch (block) {
+                    case R.drawable.whileblock:
+                        transStr += "[WHILE](";
+                        if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
+                            transStr += "[IR]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
+                        } else {
+                            transStr += "[US]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
+                        }
+                        position++;
+                        break;
+                    case R.drawable.whileendblock:
+                        transStr += "}";
+                        break;
+                    case R.drawable.ifblock:
+                        transStr += "[IF]{";
+                        if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
+                            transStr += "[IR]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
+                        } else {
+                            transStr += "[US]" + blockList.get(i).getModuleNum() + "()" + blockList.get(i).getNumOption() + "){";
+                        }
+                        position++;
+                        break;
+                    case R.drawable.ifendblock:
+                        transStr += "}";
+                        break;
+                    case R.drawable.mainmotorblcok:
+                        transStr += "[DC]" + blockList.get(i).getModuleNum() + "(";
+                        if (blockList.get(i).optionImage == R.drawable.right)
+                            transStr += "000," + blockList.get(i).getNumOption() + ")";
+                        else
+                            transStr += "001," + blockList.get(i).getNumOption() + ")";
+                        break;
+                    case R.drawable.submotorblcok:
+                        transStr += "[SM]" + blockList.get(i).getModuleNum() + "(" + blockList.get(i).getNumOption() + ")";
+                        break;
+                    case R.drawable.ledblock:
+                        transStr += "[LD]" + blockList.get(i).getModuleNum() + "(";
+                        if (blockList.get(i).optionImage == R.drawable.red) {
+                            transStr += "R," + blockList.get(i).getNumOption() + ")";
+                        } else if (blockList.get(i).optionImage == R.drawable.green) {
+                            transStr += "G," + blockList.get(i).getNumOption() + ")";
+                        } else if (blockList.get(i).optionImage == R.drawable.blue) {
+                            transStr += "B," + blockList.get(i).getNumOption() + ")";
+                        } else if (blockList.get(i).optionImage == R.drawable.yellow) {
+                            transStr += "Y," + blockList.get(i).getNumOption() + ")";
+                        } else if (blockList.get(i).optionImage == R.drawable.violet) {
+                            transStr += "P," + blockList.get(i).getNumOption() + ")";
+                        }
+                        break;
+                    }
+                }
+            }
+        return transStr;
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if(intent != null){
             if(requestCode == REQUEST_CODE_OPTION_INPUT){
                 String optionBlock = intent.getStringExtra("optionBlock");
-                String optionText = intent.getStringExtra("optionText");
-                Log.d("optionblokc", "   "+optionBlock+optionText);
+                String numOption = intent.getStringExtra("numOption");
+                String moduleNum = intent.getStringExtra("moduleNum");
+                Log.d("optionblokc", "   "+optionBlock+ numOption);
                 int Block = getBlockIamge(optionBlock);
-                mWorkspaceAdapter.setOption(Block, optionText, curPos);
+                mWorkspaceAdapter.setOption(Block, numOption, moduleNum, curPos);
             }
         }
     }
@@ -133,6 +208,36 @@ public class MainActivity extends AppCompatActivity {
             case "LEFT":
                 image = R.drawable.left;
                 break;
+            case "WHILE":
+                image = R.drawable.whileblock;
+                break;
+            case "WHILEEND":
+                image = R.drawable.whileendblock;
+                break;
+            case "IF":
+                image = R.drawable.ifblock;
+                break;
+            case "IFEND":
+                image = R.drawable.ifendblock;
+                break;
+            case "MAIN":
+                image = R.drawable.mainmotorblcok;
+                break;
+            case "SUB":
+                image = R.drawable.submotorblcok;
+                break;
+            case "LED":
+                image = R.drawable.ledblock;
+                break;
+            case "SLEEP":
+                image = R.drawable.sleep;
+                break;
+            case "START":
+                image = R.drawable.start;
+                break;
+            case "END":
+                image = R.drawable.end;
+                break;
         }
         return image;
     }
@@ -160,4 +265,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

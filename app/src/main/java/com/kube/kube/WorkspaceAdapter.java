@@ -32,7 +32,7 @@ public class WorkspaceAdapter extends BaseAdapter{
             newItem.setBlockImage(R.drawable.empty);
             newItem.setOptionImage(R.drawable.empty);
             newItem.setModuleNum("");
-            newItem.setTimeOption("");
+            newItem.setNumOption("");
             BlockList.add(newItem);
         }
     }
@@ -102,14 +102,15 @@ public class WorkspaceAdapter extends BaseAdapter{
         });
         ImageView blockImage = (ImageView) convertView.findViewById(R.id.blockImageView);
         ImageView optionImage = (ImageView) convertView.findViewById(R.id.optionImageView);
-        TextView timeText = (TextView) convertView.findViewById(R.id.timeTextView);
+        TextView moduleNumText = (TextView)convertView.findViewById(R.id.moduleNumText);
+        TextView numOptionText = (TextView) convertView.findViewById(R.id.optionNumTextView);
 
         blockImage.setOnClickListener(new blockClickListener());
 
         blockImage.setImageResource(BlockList.get(position).getBlockImage());
         optionImage.setImageResource(BlockList.get(position).getOptionImage());
-        timeText.setText(BlockList.get(position).getTimeOption());
-
+        numOptionText.setText(BlockList.get(position).getNumOption());
+        moduleNumText.setText(BlockList.get(position).getModuleNum());
         return convertView;
     }
 
@@ -121,9 +122,10 @@ public class WorkspaceAdapter extends BaseAdapter{
         }
     }
 
-    public void setOption(int block, String time, int position){
+    public void setOption(int block, String optionNum, String moduleNum, int position){
         BlockList.get(position).setOptionImage(block);
-        BlockList.get(position).setTimeOption(time);
+        BlockList.get(position).setNumOption(optionNum);
+        BlockList.get(position).setModuleNum(moduleNum);
         notifyDataSetChanged();
     }
 }

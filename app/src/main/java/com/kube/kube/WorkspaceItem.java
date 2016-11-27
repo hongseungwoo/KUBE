@@ -8,7 +8,7 @@ public class WorkspaceItem {
     int blockImage;
     int optionImage;
     String moduleNum;
-    String timeOption;
+    String numOption;
     public String getModuleNum() {
         return moduleNum;
     }
@@ -33,11 +33,11 @@ public class WorkspaceItem {
         this.optionImage = optionImage;
     }
 
-    public String getTimeOption() {
-        return timeOption;
+    public String getNumOption() {
+        return numOption;
     }
 
-    public void setTimeOption(String timeOption) {
-        this.timeOption = timeOption;
+    public void setNumOption(String timeOption) {
+        this.numOption = numOption;
     }
 }

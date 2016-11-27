@@ -6,68 +6,75 @@
     android:id="@+id/activity_input"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:columnCount="5"
-    android:weightSum="7">
+    android:columnCount="6">
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:src="@drawable/ultrasonic"
-        android:id="@+id/optionImageView"
-        android:layout_weight="1"/>
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/more"
-        android:layout_gravity="center"
-        android:id="@+id/inequalityImageView"
-        android:layout_weight="1"/>
-
-    <EditText
-        android:textSize="15dp"
-        android:inputType="numberDecimal"
-        android:layout_width="wrap_content" />
-
-    <EditText
-        android:textSize="15dp"
+        android:layout_height="100dp"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:inputType="numberDecimal"
-        android:Ems="2"
-        android:id="@+id/NumEditText"
-        android:layout_gravity="center"
-        android:layout_weight="2" />
-
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:src ="@drawable/ultrasonic"
+        android:scaleType="fitCenter"
+        android:layout_margin="5dp"
+        android:layout_columnSpan="2"
+        android:layout_rowSpan="2"
+        android:id="@+id/optionImageView"/>
     <TextView
-        android:text="초"
-        android:textSize="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:id="@+id/UnitTextView"
-        android:layout_gravity="center"
-        android:layout_weight="1"/>
-
-    <Button
-        android:text="입력"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/moduleNumTextView"
+        android:layout_marginTop="15dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_columnSpan="3"
+        android:text="Module Number"
+        android:layout_gravity="center"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:layout_marginTop="15dp"
+        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:id="@+id/moduleNumEditTextView"
+        android:layout_margin="5dp"
+        android:inputType="numberDecimal"
+        android:textSize="10sp"/>
+
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:id="@+id/inequalityImageView"
+        android:layout_height="44dp"
+        android:layout_width="44dp"
+        android:src ="@drawable/more"
+        android:layout_margin="3dp"
+        android:scaleType="fitXY"/>
+    <EditText
+        android:layout_marginTop="15dp"
+        android:id="@+id/numOptionEditText"
+        android:inputType="numberDecimal"
+        android:textSize="20dp"
+        android:layout_width="100dp"
+        android:layout_column="4"/>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/unitTextView"
+        android:text="S"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_column="5"
+        android:textSize="20dp"/>
+    <Button
         android:id="@+id/saveButton"
-        android:layout_gravity="center"
-        android:layout_weight="1"/>
-
+        android:text="Save"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="80dp"
+        android:layout_column="1" />
     <Button
-        android:text="취소"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:id="@+id/CancelButton"
-        android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:id="@+id/cancelButton"
+        android:text="Cancel"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="80dp"
+        android:layout_column="4" />
+
+
 </GridLayout>

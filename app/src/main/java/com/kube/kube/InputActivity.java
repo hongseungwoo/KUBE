@@ -30,17 +30,19 @@ public class    InputActivity extends Activity {
         
         final ImageView blockImg = (ImageView)findViewById(R.id.optionImageView);
         final ImageView inequalImg = (ImageView)findViewById(R.id.inequalityImageView);
-        final EditText numEdit = (EditText)findViewById(R.id.NumEditText);
-        final TextView unitText = (TextView)findViewById(R.id.UnitTextView);
+        final EditText numEdit = (EditText)findViewById(R.id.numOptionEditText);
+        final TextView unitText = (TextView)findViewById(R.id.unitTextView);
+        final EditText moduleEdit = (EditText)findViewById(R.id.moduleNumEditTextView);
 
         Button saveBtn = (Button)findViewById(R.id.saveButton);
-        Button cancelBtn = (Button) findViewById(R.id.CancelButton);
+        Button cancelBtn = (Button) findViewById(R.id.cancelButton);
 
        switch (curBlock){
            case R.drawable.sleep:
                blockImg.setImageResource(R.drawable.empty);
                blockImg.setTag("EMPTY");
                blockImg.setVisibility(View.INVISIBLE);
+               moduleEdit.setEnabled(false);
                inequalImg.setVisibility(View.INVISIBLE);
                numEdit.setHint("0-100");
                unitText.setText("초");
@@ -155,7 +157,6 @@ public class    InputActivity extends Activity {
 
                    }
                });
-
                unitText.setText("m");
                break;
        }
@@ -163,11 +164,13 @@ public class    InputActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String optionBlcok = (String) blockImg.getTag();
-                String optionText = numEdit.getText().toString();
+                String numOption = numEdit.getText().toString();
+                String moduleNum = moduleEdit.getText().toString();
 
                 Intent intent = new Intent();
                 intent.putExtra("optionBlock", optionBlcok);
-                intent.putExtra("optionText", optionText);
+                intent.putExtra("numOption", numOption);
+                intent.putExtra("moduleNum", moduleNum);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -178,8 +181,6 @@ public class    InputActivity extends Activity {
                 finish();
             }
         });
-
-
 
     }
 }
