@@ -1,125 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_activity_main"
     android:orientation="vertical"
-    tools:context="com.kube.kube.MainActivity"
-    android:weightSum="1">
+    >
 
-    <GridView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/workSpace"
-        android:background="#000000"
-        android:verticalSpacing="1dp"
-        android:horizontalSpacing="1dp"
-        android:numColumns="5"
-        android:layout_weight="0.9">
-    </GridView>
 
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1">
+    <!--<fragment-->
+    <!--android:id="@+id/fragment_main"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:name="com.kube.kube_fragment.fragments.IntroFragment" />-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/start"
-                android:id="@+id/startBlock"
-                android:layout_weight="1" />
+    <!--&lt;!&ndash; status bar : display connection info &ndash;&gt;-->
+    <!--<LinearLayout -->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="26dip"-->
+    <!--android:layout_gravity="bottom"-->
+    <!--android:orientation="horizontal"-->
+    <!--style="@style/AppTheme.ConnectionInfoContainer" >-->
+    <!--<ImageView -->
+    <!--android:id="@+id/status_title"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="20dip"-->
+    <!--android:layout_margin="3dip"-->
+    <!--/>-->
+    <!--<TextView -->
+    <!--android:id="@+id/status_text"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="20dip"-->
+    <!--android:layout_margin="3dip"-->
+    <!--style="@style/AppTheme.ConnectionInfoText" />-->
+    <!--</LinearLayout>-->
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/end"
-                android:id="@+id/endBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/whileblock"
-                android:id="@+id/whileBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/whileendblock"
-                android:id="@+id/whileEndBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/submotorblcok"
-                android:id="@+id/subMotorBlcok" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/mainmotorblcok"
-                android:id="@+id/mainMotorBlcok"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ledblock"
-                android:id="@+id/ledBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ifblock"
-                android:id="@+id/ifBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/ifendblock"
-                android:id="@+id/ifEndBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/sleep"
-                android:id="@+id/sleepBlock"
-                android:layout_weight="1" />
-        </LinearLayout>
-    </HorizontalScrollView>
 </LinearLayout>

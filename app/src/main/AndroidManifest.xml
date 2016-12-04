@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kube.kube">
 
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,9 +23,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".DeviceListActivity"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </activity>
+
         <activity
-            android:name=".InputActivity"
+            android:name=".workspace.InputActivity"
             android:theme="@android:style/Theme.Dialog"></activity>
+
+        <!-- Service -->
+        <service
+            android:name=".service.BTCTemplateService"
+            android:icon="@drawable/ic_launcher"
+            android:label= "@string/service_name"
+            android:configChanges="keyboardHidden|orientation|screenSize" >
+        </service>
+
+        <!-- Broadcast receiver -->
+        <receiver android:name=".service.ServiceMonitoring$ServiceMonitoringBR"/>
     </application>
+
+
 
 </manifest>

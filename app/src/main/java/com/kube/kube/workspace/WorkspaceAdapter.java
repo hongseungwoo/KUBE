@@ -1,4 +1,4 @@
-package com.kube.kube;
+package com.kube.kube.workspace;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,19 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Array;
+import com.kube.kube.R;
+
 import java.util.ArrayList;
 
 /**
  * Created by jutan on 2016-11-17.
  */
-public class WorkspaceAdapter extends BaseAdapter{
+public class WorkspaceAdapter extends BaseAdapter {
     Context mContext;
-    ArrayList<WorkspaceItem> BlockList;
+    public ArrayList<WorkspaceItem> BlockList;
     int dorPos;
     int curBlock;
 
@@ -124,3 +123,4 @@ public class WorkspaceAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 }
+

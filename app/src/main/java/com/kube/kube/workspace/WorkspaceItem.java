@@ -1,12 +1,12 @@
-package com.kube.kube;
+package com.kube.kube.workspace;
 
 /**
  * Created by jutan on 2016-11-14.
  */
 
 public class WorkspaceItem {
-    int blockImage;
-    int optionImage;
+    public int blockImage;
+    public int optionImage;
     String moduleNum;
     String numOption;
     public String getModuleNum() {
