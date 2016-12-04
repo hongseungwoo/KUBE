@@ -37,7 +37,6 @@ import com.kube.kube.utils.Constants;
 import com.kube.kube.utils.Logs;
 import com.kube.kube.utils.RecycleUtils;
 import com.kube.kube.fragments.InputDialogFragment;
-import com.kube.kube.workspace.TestModeActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -399,11 +398,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     Logs.e(TAG, "BT is not enabled");
                     Toast.makeText(this, R.string.bt_not_enabled_leaving, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case Constants.REQUEST_ACTIVITY_PSEUDO:
-                break;
-            case Constants.REQUEST_ACTIVITY_TEST:
-
                 break;
         }	// End of switch(requestCode)
     }

@@ -31,16 +31,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize" >
         </activity>
 
-        <activity
-            android:name=".fragments.InputDialogFragment"
-            android:theme="@android:style/Theme.Dialog"></activity>
-
-        <activity
-            android:name=".workspace.TestModeActivity"
-            android:theme="@android:style/Theme.Dialog"></activity>
-
-        <activity android:name=".fragments.PseudoActivity"
-            android:theme="@android:style/Theme.Dialog"></activity>
 
         <!-- Service -->
         <service
@@ -53,7 +43,5 @@
         <!-- Broadcast receiver -->
         <receiver android:name=".service.ServiceMonitoring$ServiceMonitoringBR"/>
     </application>
-
-
 
 </manifest>

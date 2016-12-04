@@ -109,9 +109,6 @@ public class WorkspaceFragment extends Fragment {
                         curPos = position;
                         Log.d("clickBlock", "     " + clickBlock + "    " + curPos);
                         mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT, clickBlock);
-//                        Intent OptionIntent = new Intent(getActivity(), InputDialogFragment.class);
-//                        OptionIntent.putExtra("Block", clickBlock);
-//                        startActivityForResult(OptionIntent, Constants.REQUEST_CODE_OPTION_INPUT);
                     }
                 }
             });
@@ -124,13 +121,6 @@ public class WorkspaceFragment extends Fragment {
             });
         }
 
-//        Button b1 = (Button) rootView.findViewById(R.id.button_workspace_connection);
-//        Button b2 = (Button) rootView.findViewById(R.id.button_workspace_intro);
-//        Button b3 = (Button) rootView.findViewById(R.id.button_workspace_workspace);
-//
-//        b1.setOnClickListener(mClickListener);
-//        b2.setOnClickListener(mClickListener);
-//        b3.setOnClickListener(mClickListener);
 
         return rootView;
     }
@@ -159,31 +149,6 @@ public class WorkspaceFragment extends Fragment {
         else return "Error : Blocklist is empty";
     }
 
-
-    /**
-     * Save last state
-     *
-     * @param outState
-     */
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.put
-//    }
-
-//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        super.onActivityResult(requestCode, resultCode, intent);
-//        if(intent != null){
-//            if(requestCode == Constants.REQUEST_CODE_OPTION_INPUT){
-//                String optionBlock = intent.getStringExtra("optionBlock");
-//                String numOption = intent.getStringExtra("numOption");
-//                String moduleNum = intent.getStringExtra("moduleNum");
-//                Log.d("optionblokc", "   "+optionBlock+ numOption);
-//                int Block = getBlockIamge(optionBlock);
-//                mWorkspaceAdapter.setOption(Block, numOption, moduleNum, curPos);
-//            }
-//        }
-//    }
 
     private View.OnLongClickListener mLongClickListener = new View.OnLongClickListener() {
         @Override
@@ -276,42 +241,6 @@ public class WorkspaceFragment extends Fragment {
         }
         return image;
     }
-
-
-    private View.OnClickListener mClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-//                case R.id.button_connection_connection:
-//                    break;
-//                case R.id.button_connection_intro:
-//                    break;
-//                case R.id.button_connection_workspace:
-//                    break;
-//                case R.id.button_intro_connection:
-//                    break;
-//                case R.id.button_intro_intro:
-//                    break;
-//                case R.id.button_intro_workspace:
-//                    break;
-//                case R.id.button_workspace_connection:
-////                    mHandler.obtainMessage(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION);
-//                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION);
-//                    break;
-//                case R.id.button_workspace_intro:
-////                    mHandler.obtainMessage(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_INTRO);
-//                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_INTRO);
-//                    break;
-//                case R.id.button_workspace_workspace:
-////                    mHandler.obtainMessage(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE);
-//                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE);
-//                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
 
 }
 

@@ -44,10 +44,10 @@ public class Constants {
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE = 1008;
 //    public static final int FRAGMENT_LISTENER_GET_FRAGMENT_INPUT = 1022;
 
-    public static final int REQUEST_CODE_OPTION_INPUT = 1004;
-    public static final int REQUEST_ACTIVITY_PSEUDO = 1020;
-    public static final int REQUEST_ACTIVITY_TEST = 1021;
-    public static final int HANDLER_TEST_ACTIVITY = 1011;
+//    public static final int REQUEST_CODE_OPTION_INPUT = 1004;
+//    public static final int REQUEST_ACTIVITY_PSEUDO = 1020;
+//    public static final int REQUEST_ACTIVITY_TEST = 1021;
+//    public static final int HANDLER_TEST_ACTIVITY = 1011;
 
     public static final String INPUT_PARAM_1 = "P1";
     public static final String INPUT_PARAM_2 = "P2";
@@ -56,35 +56,35 @@ public class Constants {
     public static final String COMMAND_HELLO = "!HELLO\n";
     public static final String COMMAND_START = "!START\n";
     public static final String COMMAND_STOP = "!STOP\n";
-    public static final String TEST_MESSAGE_DC1 = "#[DC1](001,100)[DY](001)[DC1](001,000)\n";
-    public static final String TEST_MESSAGE_DC2 = "#[DC2](001,100)[DY](001)[DC2](001,000)\n";
-    public static final String TEST_MESSAGE_DC3 = "#[DC3](001,100)[DY](001)[DC3](001,000)\n";
-    public static final String TEST_MESSAGE_DC4 = "#[DC4](001,100)[DY](001)[DC4](001,000)\n";
-    public static final String TEST_MESSAGE_DC5 = "#[DC5](001,100)[DY](001)[DC5](001,000)\n";
+    public static final String TEST_MESSAGE_DC1 = "@DC1\n";
+    public static final String TEST_MESSAGE_DC2 = "@DC2\n";
+    public static final String TEST_MESSAGE_DC3 = "@DC3\n";
+    public static final String TEST_MESSAGE_DC4 = "@DC4\n";
+    public static final String TEST_MESSAGE_DC5 = "@DC5\n";
 
-    public static final String TEST_MESSAGE_SM1 = "#[SM1](100)[DY](001)[SM1](050)\n";
-    public static final String TEST_MESSAGE_SM2 = "#[SM2](100)[DY](001)[SM2](050)\n";
-    public static final String TEST_MESSAGE_SM3 = "#[SM3](100)[DY](001)[SM3](050)\n";
-    public static final String TEST_MESSAGE_SM4 = "#[SM4](100)[DY](001)[SM4](050)\n";
-    public static final String TEST_MESSAGE_SM5 = "#[SM5](100)[DY](001)[SM5](050)\n";
+    public static final String TEST_MESSAGE_SM1 = "@SM1\n";
+    public static final String TEST_MESSAGE_SM2 = "@SM2\n";
+    public static final String TEST_MESSAGE_SM3 = "@SM3\n";
+    public static final String TEST_MESSAGE_SM4 = "@SM4\n";
+    public static final String TEST_MESSAGE_SM5 = "@SM5\n";
 
-    public static final String TEST_MESSAGE_LD1 = "#[LD1](R,100)[DY](001)[LD1](R,000)\n";
-    public static final String TEST_MESSAGE_LD2 = "#[LD2](R,100)[DY](001)[LD1](R,000)\n";
-    public static final String TEST_MESSAGE_LD3 = "#[LD3](R,100)[DY](001)[LD1](R,000)\n";
-    public static final String TEST_MESSAGE_LD4 = "#[LD4](R,100)[DY](001)[LD1](R,000)\n";
-    public static final String TEST_MESSAGE_LD5 = "#[LD5](R,100)[DY](001)[LD1](R,000)\n";
+    public static final String TEST_MESSAGE_LD1 = "@LD1\n";
+    public static final String TEST_MESSAGE_LD2 = "@LD2\n";
+    public static final String TEST_MESSAGE_LD3 = "@LD3\n";
+    public static final String TEST_MESSAGE_LD4 = "@LD4\n";
+    public static final String TEST_MESSAGE_LD5 = "@LD5\n";
 
-    public static final String TEST_MESSAGE_IR1 = "[IR1]()\n";
-    public static final String TEST_MESSAGE_IR2 = "[IR2]()\n";
-    public static final String TEST_MESSAGE_IR3 = "[IR3]()\n";
-    public static final String TEST_MESSAGE_IR4 = "[IR4]()\n";
-    public static final String TEST_MESSAGE_IR5 = "[IR5]()\n";
+    public static final String TEST_MESSAGE_IR1 = "@IR1\n";
+    public static final String TEST_MESSAGE_IR2 = "@IR2\n";
+    public static final String TEST_MESSAGE_IR3 = "@IR3\n";
+    public static final String TEST_MESSAGE_IR4 = "@IR4\n";
+    public static final String TEST_MESSAGE_IR5 = "@IR5\n";
 
-    public static final String TEST_MESSAGE_US1 = "[US1]()\n";
-    public static final String TEST_MESSAGE_US2 = "[US2]()\n";
-    public static final String TEST_MESSAGE_US3 = "[US3]()\n";
-    public static final String TEST_MESSAGE_US4 = "[US4]()\n";
-    public static final String TEST_MESSAGE_US5 = "[US5]()\n";
+    public static final String TEST_MESSAGE_US1 = "@US1\n";
+    public static final String TEST_MESSAGE_US2 = "@US2\n";
+    public static final String TEST_MESSAGE_US3 = "@US3\n";
+    public static final String TEST_MESSAGE_US4 = "@US4\n";
+    public static final String TEST_MESSAGE_US5 = "@US5\n";
     public static String MODULE_NUM_STRING = "-----";
 
     public static String RECEIVED_STRING = null;
