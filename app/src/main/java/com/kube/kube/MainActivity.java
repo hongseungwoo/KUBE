@@ -38,6 +38,11 @@ import com.kube.kube.utils.RecycleUtils;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/*
+*
+* //TODO literally the main activity. Calls three fragments(intro, conneciton, workspace)
+* //TODO and binds service which communicates with KUBE module device
+*/
 public class MainActivity extends FragmentActivity implements ActionBar.TabListener, IFragmentListener, OnFragmentListener {
 
     // Debugging
@@ -98,7 +103,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
         mWorkspaceFragment = new WorkspaceFragment(getApplicationContext(), mActivityHandler, this);
 
-        //TODO
 //        mSectionsPagerAdapter = new FragmentAdapter(mFragmentManager, mContext, this, mActivityHandler);
 
         // Set up the ViewPager with the sections adapter.
@@ -189,7 +193,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();		// TODO: Disable this line to run below code
+        super.onBackPressed();		// Disable this line to run below code
     }
 
     @Override
@@ -215,6 +219,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
     }
 
+    //TODO if you want to send message in fragments, implement "IFragmentListener" and call "OnFragmentCallBack" method
     @Override
     public void OnFragmentCallback(int msgType, int arg0, int arg1, String arg2, String arg3, Object arg4) {
         switch(msgType) {
@@ -321,6 +326,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 
     /**
      * Launch the DeviceListActivity to see devices and do scan
+     * //TODO start scanning bluetooth device
      */
     private void doScan() {
         Intent intent = new Intent(this, DeviceListActivity.class);
@@ -392,6 +398,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }	// End of switch(requestCode)
     }
 
+
+    //TODO callback method which calls 'changeFragment()'
     @Override
     public void OnFragmentListener(int msg) {
         switch(msg) {
@@ -560,6 +568,8 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         }
     }	// End of class ActivityHandler
 
+
+    //TODO switch the fragment 'f'
     private void changeFragment(Fragment f) {
         mFragment = f;
         if(mFragment != null) {
@@ -588,13 +598,17 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         public void run() {
             mActivityHandler.post(new Runnable() {
                 public void run() {
-                    // TODO:
                     mRefreshTimer = null;
                 }
             });
         }
     }
 
+
+    /**
+     *
+     * //TODO menu
+     */
     private void addOptionMenuItems(Menu menu) {
         menu.clear();
         menu.add(R.id.trans, R.id.trans, Menu.NONE, "전송");

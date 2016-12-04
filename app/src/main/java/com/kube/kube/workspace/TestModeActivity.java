@@ -25,6 +25,7 @@ public class TestModeActivity extends Activity {
     private final int MAX_MODULE = 5;
     int[] maxNumOfModule;
 
+    public TestModeActivity() {}
     public TestModeActivity(String getStr) {
         this.getStr = getStr;
     }
@@ -56,6 +57,10 @@ public class TestModeActivity extends Activity {
         usImg = new ImageView[MAX_MODULE];
 
         setImageViewsClickable(dcImg, dcNum);
+        setImageViewsClickable(smImg, smNum);
+        setImageViewsClickable(ldImg, ldNum);
+        setImageViewsClickable(irImg, irNum);
+        setImageViewsClickable(usImg, usNum);
     }
 
     private void setImageViewsClickable(ImageView[] views, int num) {
@@ -63,7 +68,7 @@ public class TestModeActivity extends Activity {
             views[i].setClickable(true);
         }
         for(int i = num; i < MAX_MODULE; i++) {
-
+            views[i].setClickable(false);
         }
     }
 
