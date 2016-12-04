@@ -19,12 +19,11 @@ import com.kube.kube.bluetooth.BleManager;
 import com.kube.kube.bluetooth.ConnectionInfo;
 import com.kube.kube.bluetooth.TransactionBuilder;
 import com.kube.kube.bluetooth.TransactionReceiver;
-import com.kube.kube.contents.CommandParser;
 import com.kube.kube.utils.AppSettings;
 import com.kube.kube.utils.Constants;
 import com.kube.kube.utils.Logs;
 
-public class BTCTemplateService extends Service {
+public class MyService extends Service {
     private static final String TAG = "LLService";
 
     // Context, System
@@ -39,7 +38,6 @@ public class BTCTemplateService extends Service {
     private BleManager mBleManager = null;
     private boolean mIsBleSupported = true;
     private ConnectionInfo mConnectionInfo = null;		// Remembers connection info when BT connection is made
-    private CommandParser mCommandParser = null;
 
     private TransactionBuilder mTransactionBuilder = null;
     private TransactionReceiver mTransactionReceiver = null;
@@ -116,7 +114,6 @@ public class BTCTemplateService extends Service {
 
         // Make instances
         mConnectionInfo = ConnectionInfo.getInstance(mContext);
-        mCommandParser = new CommandParser();
 
         // Get local Bluetooth adapter
         if(mBluetoothAdapter == null)
@@ -278,6 +275,7 @@ public class BTCTemplateService extends Service {
      */
     public void sendMessageToRemote(String message) {
         Logs.d("## SERVICE : send \"" + message + "\"");
+        Toast.makeText(mContext, "Send : " + message, Toast.LENGTH_SHORT).show();
         sendMessageToDevice(message);
     }
 
@@ -299,8 +297,8 @@ public class BTCTemplateService extends Service {
      *	Handler, Listener, Timer, Sub classes
      ******************************************************/
     public class ServiceBinder extends Binder {
-        public BTCTemplateService getService() {
-            return BTCTemplateService.this;
+        public MyService getService() {
+            return MyService.this;
         }
     }
 
@@ -350,24 +348,28 @@ public class BTCTemplateService extends Service {
                     Logs.d(TAG, "Service - MESSAGE_READ: ");
 
                     String strMsg = (String) msg.obj;
+                    Constants.RECEIVED_STRING = strMsg;
+                    Logs.d("#Received : " + strMsg);
+
                     int readCount = strMsg.length();
+
                     // send bytes in the buffer to activity
                     if(strMsg != null && strMsg.length() > 0) {
                         mActivityHandler.obtainMessage(Constants.MESSAGE_READ_CHAT_DATA, strMsg)
                                 .sendToTarget();
-                        int command = mCommandParser.setString(strMsg);
-                        if(command == CommandParser.COMMAND_THINGSPEAK) {
-                            String parameters = mCommandParser.getParameterString();
-                            StringBuilder requestUrl = new StringBuilder("http://184.106.153.149/update?");
-                            if(parameters != null && parameters.length() > 0)
-                                requestUrl.append(parameters);
+//                        int command = mCommandParser.setString(strMsg);
+//                        if(command == CommandParser.COMMAND_THINGSPEAK) {
+//                            String parameters = mCommandParser.getParameterString();
+//                            StringBuilder requestUrl = new StringBuilder("http://184.106.153.149/update?");
+//                            if(parameters != null && parameters.length() > 0)
+//                                requestUrl.append(parameters);
 
                             //Logs.d("# Find thingspeak command. URL = "+requestUrl);
 
 //						HttpAsyncTask task = new HttpAsyncTask(mHTTPListener, 0, requestUrl.toString(), HttpInterface.REQUEST_TYPE_GET);
 //						task.execute();
-                            mCommandParser.resetParser();
-                        }
+//                            mCommandParser.resetParser();
+//                        }
                     }
                     break;
 

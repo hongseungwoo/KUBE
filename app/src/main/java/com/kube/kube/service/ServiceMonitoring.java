@@ -82,8 +82,8 @@ public class ServiceMonitoring {
                 return;
             }
             // If service is running, start service.
-            if(isRunningService(context, BTCTemplateService.class) == false) {
-                context.startService(new Intent(context, BTCTemplateService.class));
+            if(isRunningService(context, MyService.class) == false) {
+                context.startService(new Intent(context, MyService.class));
             }
         }
     }

@@ -18,10 +18,10 @@ import java.util.ArrayList;
  * Created by jutan on 2016-11-17.
  */
 public class WorkspaceAdapter extends BaseAdapter {
-    Context mContext;
+    private Context mContext;
     public ArrayList<WorkspaceItem> BlockList;
-    int dorPos;
-    int curBlock;
+    private int dorPos;
+    private int curBlock;
 
     public WorkspaceAdapter(Context context) {
         mContext = context;
@@ -91,6 +91,7 @@ public class WorkspaceAdapter extends BaseAdapter {
                         Log.d("DragClickListener", "ACTION_DROP");
                         dorPos = (int) v.getTag();
                         BlockList.get(dorPos).setBlockImage(curBlock);
+                        setDirection(dorPos, curBlock);
                         Log.d("DragListener" , ""+dorPos +"         "+ BlockList.get(dorPos).blockImage);
                         notifyDataSetChanged();
                         break;
@@ -101,7 +102,7 @@ public class WorkspaceAdapter extends BaseAdapter {
         });
 
         ImageView blockImage = (ImageView) convertView.findViewById(R.id.blockImageView);
-        ImageView optionImage = (ImageView) convertView.findViewById(R.id.optionImageView);
+        ImageView optionImage = (ImageView) convertView.findViewById(R.id.optionImageView1);
         TextView moduleNumText = (TextView)convertView.findViewById(R.id.moduleNumText);
         TextView numOptionText = (TextView) convertView.findViewById(R.id.numOptionTextView);
 
@@ -115,12 +116,23 @@ public class WorkspaceAdapter extends BaseAdapter {
     }
 
 
-    public void setOption(int block, String optionNum, String moduleNum, int position){
+   public void setOption(int block, String optionNum, String moduleNum, int position){
         BlockList.get(position).setOptionImage(block);
         BlockList.get(position).setNumOption(optionNum);
         BlockList.get(position).setModuleNum("No."+moduleNum);
         Log.d("입력된 블락 옵션들 ", ""+BlockList.get(position).getOptionImage()+BlockList.get(position).getModuleNum()+BlockList.get(position).getNumOption());
         notifyDataSetChanged();
+    }
+
+    private void setDirection(int position, int block){
+        Log.d("direction      block", ""+block +"  "+position);
+        if(block == R.drawable.ifblock||block == R.drawable.whileblock){
+            BlockList.get(position-1).setBlockImage(R.drawable.up_to_right);
+        }
+        if(block == R.drawable.whileendblock||block == R.drawable.ifendblock)
+        {
+            BlockList.get(position-1).setBlockImage(R.drawable.left_to_down);
+        }
     }
 }
 

@@ -9,6 +9,7 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.kube.kube.utils.Logs;
 
@@ -16,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by ant on 2016-12-04.
- */
 
 public class BleManager {
 
@@ -414,6 +412,7 @@ public class BleManager {
                 }
                 if(writableChar == null) {
                     Logs.d(TAG, "# Write failed - No available characteristic");
+                    Toast.makeText(mContext, "Write failed - No available characteristic", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             } else {

@@ -5,7 +5,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <itme
-        android:id="@+id/trans"
+        android:id="@+id/menu_trans"
         app:showAsAction="never"
         android:orderInCategory="1"/>
+
+    <item
+        android:id="@+id/menu_pseudo"
+        app:showAsAction = "never"
+        android:orderInCategory="2"
+        android:title="psuedo" />
+
+    <item
+        android:title="modules"
+        app:showAsAction = "never"
+        android:id="@+id/menu_modulenum"
+        android:orderInCategory="3"/>
+
+    <item
+        android:title="test"
+        android:id="@+id/menu_test"
+        app:showAsAction="never"
+        android:orderInCategory="4"/>
+
+
+
 </menu>

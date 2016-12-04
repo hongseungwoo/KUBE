@@ -1,8 +1,8 @@
 package com.kube.kube.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,18 +33,20 @@ public class ConnectionFragment extends Fragment {
 //        Button b2 = (Button) rootView.findViewById(R.id.button_connection_intro);
         Button b3 = (Button) rootView.findViewById(R.id.button_connection_workspace);
 //        Button b4 = (Button) rootView.findViewById(R.id.button_connection_find_bt);
+        Button b5 = (Button) rootView.findViewById(R.id.button_connection_test);
 //
 //        b1.setOnClickListener(mClickListener);
 //        b2.setOnClickListener(mClickListener);
         b3.setOnClickListener(mClickListener);
 //        b4.setOnClickListener(mClickListener);
+        b5.setOnClickListener(mClickListener);
 
         Button connect = (Button) rootView.findViewById(R.id.button_connection_ble);
 
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mFragmentListener.OnFragmentListener(Constants.FRAGMENT_LISTENER_START_FINDING_BLUETOOTH);
+                mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH, 0);
             }
         });
 
@@ -56,19 +58,19 @@ public class ConnectionFragment extends Fragment {
         public void onClick(View v) {
             switch(v.getId()) {
 //                case R.id.button_connection_connection:
-////                    mHandler.obtainMessage(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_CONNECTION);
-//                    mFragmentListener.OnFragmentListener(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_CONNECTION);
+////                    mHandler.obtainMessage(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION);
+//                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION);
 //                    break;
 //                case R.id.button_connection_intro:
-////                    mHandler.obtainMessage(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_INTRO);
-//                    mFragmentListener.OnFragmentListener(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_INTRO);
+////                    mHandler.obtainMessage(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_INTRO);
+//                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_INTRO);
 //                    break;
                 case R.id.button_connection_workspace:
-//                    mHandler.obtainMessage(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_WORKSPACE);
-                    mFragmentListener.OnFragmentListener(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_WORKSPACE);
+//                    mHandler.obtainMessage(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE);
+                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE, 0);
                     break;
 //                case R.id.button_connection_find_bt:
-//                    mFragmentListener.OnFragmentListener(Constants.FRAGMENT_LISTENER_START_FINDING_BLUETOOTH);
+//                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH);
 //                case R.id.button_intro_connection:
 //                    break;
 //                case R.id.button_intro_intro:
@@ -81,6 +83,8 @@ public class ConnectionFragment extends Fragment {
 //                    break;
 //                case R.id.button_workspace_workspace:
 //                    break;
+                case R.id.button_connection_test:
+                    break;
             }
         }
     };

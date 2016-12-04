@@ -1,138 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnCount="6"
-    android:rowCount="5">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="300dp"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:layout_margin="7dp">
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="DC"/>
+    <GridLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="6"
+        android:rowCount="5"
+        android:layout_weight="0.21">
 
-    <ImageView
-        android:id="@+id/testmode_dcimg_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_dcimg_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_dcimg_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_dcimg_4"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_dcimg_5"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="DC"
+            android:textAlignment="center"
+            android:background="#555555"/>
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="SM"/>
+        <Button
+            android:id="@+id/testmode_dcimg_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/mainmotorblcok"/>
+        <Button
+            android:id="@+id/testmode_dcimg_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/mainmotorblcok"/>
+        <Button
+            android:id="@+id/testmode_dcimg_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/mainmotorblcok"/>
+        <Button
+            android:id="@+id/testmode_dcimg_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/mainmotorblcok"/>
+        <Button
+            android:id="@+id/testmode_dcimg_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/mainmotorblcok"/>
 
-    <ImageView
-        android:id="@+id/testmode_smimg_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_smimg_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_smimg_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_smimg_4"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_smimg_5"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="SM"
+            android:textAlignment="center"
+            android:background="#555555"/>
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="LD"/>
+        <Button
+            android:id="@+id/testmode_smimg_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/submotorblcok"/>
+        <Button
+            android:id="@+id/testmode_smimg_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/submotorblcok"/>
+        <Button
+            android:id="@+id/testmode_smimg_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/submotorblcok"/>
+        <Button
+            android:id="@+id/testmode_smimg_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/submotorblcok"/>
+        <Button
+            android:id="@+id/testmode_smimg_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/submotorblcok"/>
 
-    <ImageView
-        android:id="@+id/testmode_ldimg_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_ldimg_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_ldimg_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_ldimg_4"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_ldimg_5"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="LD"
+            android:textAlignment="center"
+            android:background="#555555"/>
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="IR"/>
+        <Button
+            android:id="@+id/testmode_ldimg_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ledblock"/>
+        <Button
+            android:id="@+id/testmode_ldimg_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ledblock"/>
+        <Button
+            android:id="@+id/testmode_ldimg_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ledblock"/>
+        <Button
+            android:id="@+id/testmode_ldimg_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ledblock"/>
+        <Button
+            android:id="@+id/testmode_ldimg_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ledblock"/>
 
-    <ImageView
-        android:id="@+id/testmode_irimg_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_irimg_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_irimg_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_irimg_4"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_irimg_5"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="IR"
+            android:textAlignment="center"
+            android:background="#555555"/>
 
-    <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:text="US"/>
+        <Button
+            android:id="@+id/testmode_irimg_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/infrared"/>
+        <Button
+            android:id="@+id/testmode_irimg_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/infrared"/>
+        <Button
+            android:id="@+id/testmode_irimg_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/infrared"/>
+        <Button
+            android:id="@+id/testmode_irimg_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/infrared"/>
+        <Button
+            android:id="@+id/testmode_irimg_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/infrared"/>
 
-    <ImageView
-        android:id="@+id/testmode_usimg_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_usimg_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_usimg_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_usimg_4"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-    <ImageView
-        android:id="@+id/testmode_usimg_5"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:text="US"
+            android:textAlignment="center"
+            android:background="#555555"/>
 
-</GridLayout>
+        <Button
+            android:id="@+id/testmode_usimg_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ultrasonic"/>
+        <Button
+            android:id="@+id/testmode_usimg_2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ultrasonic"/>
+        <Button
+            android:id="@+id/testmode_usimg_3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ultrasonic"/>
+        <Button
+            android:id="@+id/testmode_usimg_4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ultrasonic"/>
+        <Button
+            android:id="@+id/testmode_usimg_5"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ultrasonic"/>
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/testmode_button"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="ok"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

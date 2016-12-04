@@ -1,8 +1,8 @@
 package com.kube.kube.fragments;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,7 @@ public class IntroFragment extends Fragment {
         h.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mFragmentListener.OnFragmentListener(Constants.FRAGMENT_LISTENER_CHANGE_FRAGMENT_CONNECTION);
+                mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION, 0);
             }
         }, 2000);
 

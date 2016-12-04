@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
 
     <application
@@ -31,16 +32,19 @@
         </activity>
 
         <activity
-            android:name=".workspace.InputActivity"
+            android:name=".fragments.InputDialogFragment"
             android:theme="@android:style/Theme.Dialog"></activity>
 
         <activity
             android:name=".workspace.TestModeActivity"
             android:theme="@android:style/Theme.Dialog"></activity>
 
+        <activity android:name=".fragments.PseudoActivity"
+            android:theme="@android:style/Theme.Dialog"></activity>
+
         <!-- Service -->
         <service
-            android:name=".service.BTCTemplateService"
+            android:name=".service.MyService"
             android:icon="@drawable/ic_launcher"
             android:label= "@string/service_name"
             android:configChanges="keyboardHidden|orientation|screenSize" >

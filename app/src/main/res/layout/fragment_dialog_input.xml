@@ -31,7 +31,7 @@
 
     <EditText
         android:layout_marginTop="15dp"
-        android:layout_height="20dp"
+        android:layout_height="40dp"
         android:layout_width="30dp"
         android:id="@+id/moduleNumEditTextView"
         android:layout_margin="5dp"
