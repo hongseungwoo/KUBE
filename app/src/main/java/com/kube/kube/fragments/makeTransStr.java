@@ -50,7 +50,7 @@ public class MakeTransStr {
         String translated = parseSecond(parseFirst(makeTransStr(start)));
         StringBuilder sb = new StringBuilder(translated);
         sb.insert(0, "#");
-        sb.insert(translated.length(), "\n");
+        sb.insert(translated.length()+1, "\n");
         return new String(sb);
     }
 
@@ -120,6 +120,9 @@ public class MakeTransStr {
                     } else if (blockList.get(i).optionImage == R.drawable.sky) {
                         transStr += "K," + blockList.get(i).getNumOption() + ")";
                     }
+                    break;
+                case R.drawable.sleep:
+                    transStr += "[DY](" + blockList.get(i).getNumOption() + ")";
                     break;
                 case R.drawable.end:
                     checkEnd = true;

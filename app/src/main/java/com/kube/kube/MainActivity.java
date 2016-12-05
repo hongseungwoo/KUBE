@@ -37,6 +37,7 @@ import com.kube.kube.utils.Constants;
 import com.kube.kube.utils.Logs;
 import com.kube.kube.utils.RecycleUtils;
 import com.kube.kube.fragments.InputDialogFragment;
+import com.kube.kube.workspace.WorkspaceAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,6 +74,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
     private Fragment mFragment = null;
 
     private WorkspaceFragment mWorkspaceFragment;
+//    private WorkspaceAdapter mWorkspaceAdapter;
 
     private String numOfModules;
 
@@ -106,6 +108,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         changeFragment(new IntroFragment(mActivityHandler, this));
 
         mWorkspaceFragment = new WorkspaceFragment(getApplicationContext(), mActivityHandler, this);
+//        mWorkspaceFragment = new WorkspaceFragment(getApplicationContext(), mActivityHandler, this, mWorkspaceAdapter);
 
 //        mSectionsPagerAdapter = new FragmentAdapter(mFragmentManager, mContext, this, mActivityHandler);
 
@@ -699,7 +702,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
 //                                    Intent testIntent = new Intent(mContext, new TestModeActivity(str, mActivityHandler).getClass());
 //                                    startActivityForResult(testIntent, Constants.REQUEST_TEST_ACTIVITY);
                                     //TODO call changeFragment in ActivityForResult()-"Constants.REQUEST_TEST_ACTIVITY"
-                                    changeFragment(new WorkspaceFragment(mContext, mActivityHandler, mFragmentListener));
+                                    changeFragment(mWorkspaceFragment);
 //                                }
                             }
                         },2000);
@@ -813,6 +816,8 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
     private void addOptionMenuItems(Menu menu) {
         menu.clear();
         menu.add(R.id.menu_trans, R.id.menu_trans, Menu.NONE, "전송");
+        menu.add(R.id.menu_start, R.id.menu_start, Menu.NONE, "시작");
+        menu.add(R.id.menu_stop, R.id.menu_stop, Menu.NONE, "중지");
         menu.add(R.id.menu_pseudo, R.id.menu_pseudo, Menu.NONE, "수도 코드");
         menu.add(R.id.menu_modulenum, R.id.menu_modulenum, Menu.NONE, "모듈 개수");
         menu.add(R.id.menu_test, R.id.menu_test, Menu.NONE, "테스트모드");
@@ -830,11 +835,24 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         switch (item.getItemId()) {
             case R.id.menu_trans: //send message
 //                String trans = mWorkspaceFragment.MakeTransStr(0);
+
                 String trans = mWorkspaceFragment.translateToModuleLanguage();
                 if(mService != null && trans != null)
                     sendMessageToDevice(trans);
-                Log.d("##", ""+trans);
+                Logs.d("##", ""+trans);
                 return true;
+            case R.id.menu_start:
+                Logs.d("# menu_start");
+                if(mService != null) {
+                    sendMessageToDevice(Constants.COMMAND_START);
+                }
+                break;
+            case R.id.menu_stop:
+                Logs.d("# menu_stop");
+                if(mService != null) {
+                    sendMessageToDevice(Constants.COMMAND_STOP);
+                }
+                break;
             case R.id.menu_pseudo:
 //                Intent pseudosIntent = new Intent(mContext, PseudoActivity.class);
                 //startActivityforResult(pseudosIntent, Constants.REQUEST_ACTIVITY_PSEUDO);

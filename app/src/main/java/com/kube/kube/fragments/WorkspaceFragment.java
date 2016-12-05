@@ -53,6 +53,12 @@ public class WorkspaceFragment extends Fragment {
 
     private static final String IMAGEVIEW_TAG = "DRAG_IMAGE";
 
+//    public WorkspaceFragment(Context c, Handler h, OnFragmentListener f, WorkspaceAdapter w) {
+//        this.mContext = c;
+//        this.mHandler = h;
+//        this.mFragmentListener = f;
+//        this.mWorkspaceAdapter = w;
+//    }
 
     public WorkspaceFragment(Context c, Handler h, OnFragmentListener f) {
         this.mContext = c;
@@ -95,7 +101,7 @@ public class WorkspaceFragment extends Fragment {
             }
 
             final GridView workspace = (GridView) rootView.findViewById(R.id.workSpace);
-            mWorkspaceAdapter = new WorkspaceAdapter(getActivity());
+            mWorkspaceAdapter = new WorkspaceAdapter(mContext);
             workspace.setAdapter(mWorkspaceAdapter);
             workspace.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

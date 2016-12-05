@@ -10,22 +10,34 @@
         android:orderInCategory="1"/>
 
     <item
+        android:title="start"
+        android:id="@+id/menu_start"
+        app:showAsAction="never"
+        android:orderInCategory="2"/>
+
+    <item
+        android:title="stop"
+        android:id="@+id/menu_stop"
+        app:showAsAction="never"
+        android:orderInCategory="3"/>
+
+    <item
         android:id="@+id/menu_pseudo"
         app:showAsAction = "never"
-        android:orderInCategory="2"
+        android:orderInCategory="4"
         android:title="psuedo" />
 
     <item
         android:title="modules"
         app:showAsAction = "never"
         android:id="@+id/menu_modulenum"
-        android:orderInCategory="3"/>
+        android:orderInCategory="5"/>
 
     <item
         android:title="test"
         android:id="@+id/menu_test"
         app:showAsAction="never"
-        android:orderInCategory="4"/>
+        android:orderInCategory="6"/>
 
 
 
