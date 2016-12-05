@@ -31,6 +31,8 @@ public class Constants {
 
 
 
+
+
     // Intent request codes
     public static final int REQUEST_CONNECT_DEVICE = 1;
     public static final int REQUEST_ENABLE_BT = 2;
@@ -43,6 +45,9 @@ public class Constants {
     public static final int FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH = 1003;
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE = 1008;
 //    public static final int FRAGMENT_LISTENER_GET_FRAGMENT_INPUT = 1022;
+
+
+    public static final int HANDLER_ACTIVITY_RESEND_HELLO = 3000;
 
 //    public static final int REQUEST_CODE_OPTION_INPUT = 1004;
 //    public static final int REQUEST_ACTIVITY_PSEUDO = 1020;
@@ -85,6 +90,8 @@ public class Constants {
     public static final String TEST_MESSAGE_US3 = "@US3\n";
     public static final String TEST_MESSAGE_US4 = "@US4\n";
     public static final String TEST_MESSAGE_US5 = "@US5\n";
+
+    public static String STRING_HELLO_ACK;
     public static String MODULE_NUM_STRING = "-----";
 
     public static String RECEIVED_STRING = null;

@@ -428,11 +428,11 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                  changeFragment(new PseudoFragment(mFragmentListener));
                 break;
             case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE:
-                if(numOfModules == null) {
+                if(Constants.STRING_HELLO_ACK == null) {
                     Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                TestModeDialogFragment mTestModeDialogFragment = new TestModeDialogFragment(mFragmentListener, numOfModules);
+                TestModeDialogFragment mTestModeDialogFragment = new TestModeDialogFragment(mFragmentListener, Constants.STRING_HELLO_ACK);
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 mTestModeDialogFragment.show(mFragmentTransaction, "TEST MODE");
                 break;
@@ -649,6 +649,10 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
 
                 // Receives BT state messages from service
                 // and updates BT state UI
+                case Constants.HANDLER_ACTIVITY_RESEND_HELLO:
+                    Logs.d("## Handler - Resend HELLO msg");
+                    sendMessageToDevice(Constants.COMMAND_HELLO);
+                    break;
                 case Constants.MESSAGE_BT_STATE_INITIALIZED:
                     Logs.d(":::Service initialized:::");
                     Toast.makeText(mContext, ":::Service initialized:::", Toast.LENGTH_SHORT).show();
@@ -690,7 +694,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                             @Override
                             public void run() {
 //                                Constants.MODULE_NUM_STRING = Constants.RECEIVED_STRING;
-                                numOfModules = Constants.RECEIVED_STRING;
+//                                numOfModules = Constants.RECEIVED_STRING;
 //                                if(str.split(":")[0].equals("NUM")) {
 //                                    Intent testIntent = new Intent(mContext, new TestModeActivity(str, mActivityHandler).getClass());
 //                                    startActivityForResult(testIntent, Constants.REQUEST_TEST_ACTIVITY);
@@ -814,6 +818,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         menu.add(R.id.menu_test, R.id.menu_test, Menu.NONE, "테스트모드");
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         addOptionMenuItems(menu);
@@ -837,24 +842,24 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 break;
             case R.id.menu_modulenum:
 //                String s = Constants.MODULE_NUM_STRING;
-                if(numOfModules == null) {
+                if(Constants.STRING_HELLO_ACK == null) {
                     Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String s = numOfModules;
+                String s = Constants.STRING_HELLO_ACK;
                 Toast.makeText(mContext,
-                        "DC : " + s.charAt(0) +
-                        " SM : " + s.charAt(1) +
-                        " LD : " + s.charAt(2) +
-                        " IR : " + s.charAt(3) +
-                        " SM : " + s.charAt(4), Toast.LENGTH_LONG).show();
+                        "DC : " + s.charAt(6) +
+                        " SM : " + s.charAt(9) +
+                        " LD : " + s.charAt(12) +
+                        " IR : " + s.charAt(15) +
+                        " SM : " + s.charAt(18), Toast.LENGTH_LONG).show();
                 break;
             case R.id.menu_test:
-                if(numOfModules == null) {
+                if(Constants.STRING_HELLO_ACK == null) {
                     Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
-                    onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE, 0);
                     break;
                 }
+                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE, 0);
 
 //                TestModeActivity testModeActivity = new TestModeActivity(numOfModules, mActivityHandler);
 //                Intent testIntent = new Intent(mContext, testModeActivity.getClass());

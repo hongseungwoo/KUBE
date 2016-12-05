@@ -21,6 +21,7 @@ import com.kube.kube.bluetooth.TransactionBuilder;
 import com.kube.kube.bluetooth.TransactionReceiver;
 import com.kube.kube.utils.AppSettings;
 import com.kube.kube.utils.Constants;
+import com.kube.kube.utils.Flags;
 import com.kube.kube.utils.Logs;
 
 public class MyService extends Service {
@@ -348,6 +349,15 @@ public class MyService extends Service {
                     Logs.d(TAG, "Service - MESSAGE_READ: ");
 
                     String strMsg = (String) msg.obj;
+                    if(strMsg.split(":")[0].equals("NUM")) {
+                        if(strMsg.charAt(strMsg.length()-1) != '\n') {
+                            Flags.isFirstHelloAckMsg = false;
+                            mActivityHandler.obtainMessage(Constants.HANDLER_ACTIVITY_RESEND_HELLO).sendToTarget();
+                        } else {
+                            Flags.isFirstHelloAckMsg = true;
+                            Constants.STRING_HELLO_ACK = strMsg;
+                        }
+                    }
                     Constants.RECEIVED_STRING = strMsg;
                     Logs.d("#Received : " + strMsg);
 
