@@ -111,7 +111,9 @@ public class WorkspaceFragment extends Fragment {
                             clickBlock != R.drawable.start &&
                             clickBlock != R.drawable.end &&
                             clickBlock != R.drawable.ifendblock &&
-                            clickBlock != R.drawable.whileendblock) {
+                            clickBlock != R.drawable.whileendblock &&
+                            clickBlock != R.drawable.left_to_down &&
+                            clickBlock != R.drawable.up_to_right) {
                         curPos = position;
                         Log.d("clickBlock", "     " + clickBlock + "    " + curPos);
                         mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT, clickBlock);
