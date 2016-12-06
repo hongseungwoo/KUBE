@@ -121,6 +121,10 @@ public class WorkspaceFragment extends Fragment {
             workspace.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
                 @Override
                 public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                    mBlockList = mWorkspaceAdapter.BlockList;
+                    int block = mBlockList.get(position).getBlockImage();
+                    if(block == R.drawable.whileblock||block == R.drawable.whileendblock||block == R.drawable.ifblock||block == R.drawable.ifendblock)
+                        deleteBlock(position-1);
                     deleteBlock(position);
                     return false;
                 }
@@ -147,7 +151,7 @@ public class WorkspaceFragment extends Fragment {
     public synchronized String translateToModuleLanguage() {
         if(mWorkspaceAdapter.BlockList != null) {
             mBlockList = mWorkspaceAdapter.BlockList;
-            MakeTransStr mMakeTrans = new MakeTransStr(mBlockList);
+            MakeTransStr mMakeTrans = new MakeTransStr(mBlockList, mContext);
             String result = mMakeTrans.translate(0);
             Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
             return result;

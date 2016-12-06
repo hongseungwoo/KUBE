@@ -35,6 +35,7 @@
         android:layout_width="30dp"
         android:id="@+id/moduleNumEditTextView"
         android:layout_margin="5dp"
+        android:maxLength="1"
         android:inputType="numberDecimal"
         android:textSize="10sp"/>
 
@@ -52,6 +53,7 @@
         android:inputType="numberDecimal"
         android:textSize="20dp"
         android:layout_width="100dp"
+        android:maxLength="2"
         android:layout_column="4"/>
     <TextView
         android:layout_marginTop="15dp"

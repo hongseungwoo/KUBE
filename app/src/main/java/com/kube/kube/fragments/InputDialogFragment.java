@@ -56,38 +56,22 @@ public class InputDialogFragment extends DialogFragment {
                 blockImg.setVisibility(View.INVISIBLE);
                 moduleEdit.setEnabled(false);
                 inequalImg.setVisibility(View.INVISIBLE);
-                numEdit.setHint("0-100");
+                numEdit.setHint("0-99");
                 unitText.setText("초");
                 break;
             case R.drawable.submotorblcok:
-                blockImg.setImageResource(R.drawable.right);
-                blockImg.setTag("RIGHT");
-                blockImg.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        image++;
-                        switch (image%2){
-                            case 0 :
-                                blockImg.setImageResource(R.drawable.right);
-                                blockImg.setTag("RIGHT");
-                                break;
-                            case 1:
-                                blockImg.setImageResource(R.drawable.left);
-                                blockImg.setTag("LEFT");
-                                break;
-                        }
-                    }
-                });
+                blockImg.setVisibility(View.INVISIBLE);
+                blockImg.setTag("EMPTY");
                 inequalImg.setVisibility(View.INVISIBLE);
-                unitText.setText("도");
-                numEdit.setHint("각도 0-100");
+                unitText.setVisibility(View.INVISIBLE);
+                numEdit.setHint("값 0-99");
 
                 break;
             case R.drawable.mainmotorblcok:
                 blockImg.setImageResource(R.drawable.right);
                 blockImg.setTag("RIGHT");
                 unitText.setVisibility(View.INVISIBLE);
-                numEdit.setHint("회전 속도 0-100");
+                numEdit.setHint("회전 속도 0-99");
                 blockImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -143,7 +127,7 @@ public class InputDialogFragment extends DialogFragment {
                 });
                 inequalImg.setVisibility(View.INVISIBLE);
                 unitText.setVisibility(View.INVISIBLE);
-                numEdit.setHint("밝기 0-100");
+                numEdit.setHint("밝기 0-99");
                 break;
             case R.drawable.whileblock:
             case R.drawable.ifblock:

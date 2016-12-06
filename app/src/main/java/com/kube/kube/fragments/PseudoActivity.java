@@ -33,7 +33,7 @@ public class PseudoActivity extends AppCompatActivity {
         String pseudoStr = "";
         boolean checkEnd = false;
         for(int i = start;i < mBlockList.size();i+=5){
-            if(checkEnd)
+            if(checkEnd == true)
                 break;
             int block = mBlockList.get(i).getBlockImage();
             switch (block) {
@@ -46,57 +46,56 @@ public class PseudoActivity extends AppCompatActivity {
                     break;
 
                 case R.drawable.whileblock:
-                    pseudoStr += "[WHILE](";
                     if (mBlockList.get(i).getOptionImage() == R.drawable.infrared) {
-                        pseudoStr += "[IR" + mBlockList.get(i).getModuleNum() + "]()" + mBlockList.get(i).getNumOption() + "){";
+                        pseudoStr += " 적외선 센서 " + mBlockList.get(i).getModuleNum() + "의 값이 " + mBlockList.get(i).getNumOption() + "일 동안\n";
                     } else {
-                        pseudoStr += "[US" + mBlockList.get(i).getModuleNum() + "]()" + mBlockList.get(i).getNumOption() + "){";
+                        pseudoStr += " 초음파 센서 " + mBlockList.get(i).getModuleNum() + "의 값이 " + mBlockList.get(i).getNumOption() + "일 동안\n";
                     }
                     break;
                 case R.drawable.whileendblock:
-                    pseudoStr += "}";
+                    pseudoStr += "동작합니다.\n";
                     checkEnd=true;
                     break;
                 case R.drawable.ifblock:
-                    pseudoStr += "[IF](";
                     if (mBlockList.get(i).getOptionImage() == R.drawable.infrared) {
-                        pseudoStr += "[IR" + mBlockList.get(i).getModuleNum() + "]()" + mBlockList.get(i).getNumOption() + "){";
+                        pseudoStr += " 만약에 적외선 센서 " + mBlockList.get(i).getModuleNum() + "의 값이 " + mBlockList.get(i).getNumOption() + "이면\n";
                     } else {
-                        pseudoStr += "[US" + mBlockList.get(i).getModuleNum() + "]()" + mBlockList.get(i).getNumOption() + "){";
+                        pseudoStr += " 만약에 초음파 센서 " + mBlockList.get(i).getModuleNum() + "의 값이 " + mBlockList.get(i).getNumOption() + "이면\n";
                     }
                     break;
                 case R.drawable.ifendblock:
-                    pseudoStr += "}";
+                    pseudoStr += "동작합니다.\n";
                     checkEnd=true;
                     break;
                 case R.drawable.mainmotorblcok:
-                    pseudoStr += "[DC" + mBlockList.get(i).getModuleNum() + "](";
+                    pseudoStr += "메인 모터 " + mBlockList.get(i).getModuleNum() + "이(가)";
                     if (mBlockList.get(i).optionImage == R.drawable.right)
-                        pseudoStr += "000," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "시계 방향으로 " + mBlockList.get(i).getNumOption() + "속도로 ";
                     else
-                        pseudoStr += "001," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "반시계 방향으로 " + mBlockList.get(i).getNumOption() + "속도로 ";
                     break;
                 case R.drawable.submotorblcok:
-                    pseudoStr += "[SM" + mBlockList.get(i).getModuleNum() + "](" + mBlockList.get(i).getNumOption() + ")";
+                    pseudoStr += "서브 모터 " + mBlockList.get(i).getModuleNum() + "이(가)" + mBlockList.get(i).getNumOption() + "도 만큼 ";
                     break;
                 case R.drawable.ledblock:
-                    pseudoStr += "[LD" + mBlockList.get(i).getModuleNum() + "](";
+                    pseudoStr += "LED " + mBlockList.get(i).getModuleNum() + "이(가) ";
                     if (mBlockList.get(i).optionImage == R.drawable.red) {
-                        pseudoStr += "R," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "빨강색으로 " + mBlockList.get(i).getNumOption() + "밝기로 ";
                     } else if (mBlockList.get(i).optionImage == R.drawable.green) {
-                        pseudoStr += "G," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "녹색으로 " + mBlockList.get(i).getNumOption() + "밝기로 ";
                     } else if (mBlockList.get(i).optionImage == R.drawable.blue) {
-                        pseudoStr += "B," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "파랑색으로 " + mBlockList.get(i).getNumOption() + "밝기로 ";
                     } else if (mBlockList.get(i).optionImage == R.drawable.yellow) {
-                        pseudoStr += "Y," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "노랑색으로 " + mBlockList.get(i).getNumOption() + "밝기로 ";
                     } else if (mBlockList.get(i).optionImage == R.drawable.violet) {
-                        pseudoStr += "P," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "보라색으로 " + mBlockList.get(i).getNumOption() + "밝기로 ";
                     } else if (mBlockList.get(i).optionImage == R.drawable.sky) {
-                        pseudoStr += "K," + mBlockList.get(i).getNumOption() + ")";
+                        pseudoStr += "하늘색으로 " + mBlockList.get(i).getNumOption() + "밝기로 ";
                     }
                     break;
                 case R.drawable.end:
                     checkEnd = true;
+                    pseudoStr+= "작동을 멈춥니다.\n";
                     break;
             }
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--<Button-->
@@ -22,11 +23,50 @@
     <!--android:layout_height="match_parent"-->
     <!--android:text="intro"/>-->
 
-    <ImageView
+
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/start_k"
+            android:id="@+id/start_k"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
 
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/start_u"
+            android:id="@+id/start_u"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
 
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/start_b"
+            android:id="@+id/start_b"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/start_e"
+            android:id="@+id/start_e"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+    </LinearLayout>
 </LinearLayout>

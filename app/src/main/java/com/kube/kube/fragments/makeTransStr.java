@@ -1,5 +1,8 @@
 package com.kube.kube.fragments;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.kube.kube.R;
 import com.kube.kube.workspace.WorkspaceItem;
 
@@ -32,11 +35,13 @@ public class MakeTransStr {
     private int[] whileStartPos;
 
     private ArrayList<WorkspaceItem> blockList;
+    private Context mContext;
 
 
     //Constructor
-    public MakeTransStr(ArrayList<WorkspaceItem> blockList){
+    public MakeTransStr(ArrayList<WorkspaceItem> blockList, Context c){
         this.blockList = blockList;
+        this.mContext = c;
     }
 
     /**
@@ -129,6 +134,8 @@ public class MakeTransStr {
                     break;
             }
         }
+        if(checkEnd == false)
+            Toast.makeText(mContext, "End 계열의 수가 맞지 않습니다.", Toast.LENGTH_SHORT).show();
         return transStr;
     }
 
@@ -229,7 +236,7 @@ public class MakeTransStr {
                     i++;
                     break;
                 case 'L':
-                    command[x++] = module[3];
+                    command[x++] = module[2];
                     i++;
                     break;
                 case 'U':
