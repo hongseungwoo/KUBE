@@ -36,6 +36,7 @@
         android:id="@+id/moduleNumEditTextView"
         android:layout_margin="5dp"
         android:inputType="numberDecimal"
+        android:maxLength="1"
         android:textSize="10sp"/>
 
     <ImageView
@@ -51,6 +52,7 @@
         android:id="@+id/numOptionEditText"
         android:inputType="numberDecimal"
         android:textSize="20dp"
+        android:maxLength="2"
         android:layout_width="100dp"
         android:layout_column="4"/>
     <TextView

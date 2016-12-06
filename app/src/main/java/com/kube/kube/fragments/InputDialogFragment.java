@@ -56,7 +56,7 @@ public class InputDialogFragment extends DialogFragment {
                 blockImg.setVisibility(View.INVISIBLE);
                 moduleEdit.setEnabled(false);
                 inequalImg.setVisibility(View.INVISIBLE);
-                numEdit.setHint("0-100");
+                numEdit.setHint("0-99");
                 unitText.setText("초");
                 break;
             case R.drawable.submotorblcok:
@@ -80,14 +80,14 @@ public class InputDialogFragment extends DialogFragment {
                 });
                 inequalImg.setVisibility(View.INVISIBLE);
                 unitText.setText("도");
-                numEdit.setHint("각도 0-100");
+                numEdit.setHint("각도 0-99");
 
                 break;
             case R.drawable.mainmotorblcok:
                 blockImg.setImageResource(R.drawable.right);
                 blockImg.setTag("RIGHT");
                 unitText.setVisibility(View.INVISIBLE);
-                numEdit.setHint("회전 속도 0-100");
+                numEdit.setHint("회전 속도 0-99");
                 blockImg.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

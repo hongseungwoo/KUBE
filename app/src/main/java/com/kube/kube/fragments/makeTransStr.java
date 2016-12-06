@@ -1,5 +1,7 @@
 package com.kube.kube.fragments;
 
+import android.widget.Toast;
+
 import com.kube.kube.R;
 import com.kube.kube.workspace.WorkspaceItem;
 
@@ -129,6 +131,8 @@ public class MakeTransStr {
                     break;
             }
         }
+        if(checkEnd == false)
+            Toast.makeText(mContext, "End 계열의 수가 맞지 않습니다.", Toast.LENGTH_SHORT).show();
         return transStr;
     }
 
