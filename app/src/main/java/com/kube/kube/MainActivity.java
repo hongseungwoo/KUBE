@@ -1,8 +1,8 @@
 package com.kube.kube;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -25,11 +25,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.kube.kube.fragments.ConnectionFragment;
-import com.kube.kube.fragments.InputSleepDialogFragment;
 import com.kube.kube.fragments.IntroFragment;
+import com.kube.kube.fragments.LoadDialogFragment;
 import com.kube.kube.fragments.OnFragmentListener;
-import com.kube.kube.fragments.PseudoFragment;
+import com.kube.kube.fragments.SaveDialogFragment;
 import com.kube.kube.fragments.SendDialogFragment;
 import com.kube.kube.fragments.TestModeDialogFragment;
 import com.kube.kube.fragments.WorkspaceFragment;
@@ -39,7 +38,6 @@ import com.kube.kube.utils.Constants;
 import com.kube.kube.utils.Logs;
 import com.kube.kube.utils.RecycleUtils;
 import com.kube.kube.fragments.InputDialogFragment;
-import com.kube.kube.workspace.WorkspaceAdapter;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -416,33 +414,53 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
             case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_INTRO:
                 changeFragment(new IntroFragment(mActivityHandler, this));
                 break;
-            case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION:
-                changeFragment(new ConnectionFragment(mActivityHandler, this));
-                break;
             case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE:
                 changeFragment(mWorkspaceFragment);
                 break;
             case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT:
-//                InputDialogFragment mInputDialogFragment = new InputDialogFragment(mActivityHandler, mFragmentListener,clickedBlock);
-//                InputDialogFragment mInputDialogFragment = new InputDialogFragment(mInputFragmentListener, clickedBlock);
-                InputDialogFragment mInputDialogFragment = new InputDialogFragment(mFragmentListener, clickedBlock);
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mInputDialogFragment.show(mFragmentTransaction, "INPUT");
-// changeFragment(new InputDialogFragment(mActivityHandler, , clickedBlock));
+                showMyDialog(new InputDialogFragment(mFragmentListener, clickedBlock), "INPUT");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP:
+                showMyDialog(new TestModeDialogFragment(mFragmentListener, Constants.STRING_HELLO_ACK), "SLEEPINPUT");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SAVE:
+                showMyDialog(new SaveDialogFragment(mFragmentListener), "SAVE");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_LOAD:
+                showMyDialog(new LoadDialogFragment(mFragmentListener), "LOAD");
                 break;
             case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SEND:
-                trans = mWorkspaceFragment.translateToModuleLanguage();
                 String pseudo = mWorkspaceFragment.translateToKoreaPseudoCode();
+                trans = mWorkspaceFragment.translateToModuleLanguage();
 
                 SendDialogFragment mSendDialogFragment = new SendDialogFragment(mFragmentListener);
                 mSendDialogFragment.setTrans(trans, pseudo);
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mSendDialogFragment.show(mFragmentTransaction, "SEND");
+                showMyDialog(mSendDialogFragment, "SEND");
                 break;
-            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP:
-                InputSleepDialogFragment mSleepDialogFragment = new InputSleepDialogFragment(mFragmentListener);
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mSleepDialogFragment.show(mFragmentTransaction, "SLEEPINPUT");
+            case Constants.FRAGMENT_CALLBACK_SAVE_1:
+                mWorkspaceFragment.saveData("ONE");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SAVE_2:
+                mWorkspaceFragment.saveData("TWO");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SAVE_3:
+                mWorkspaceFragment.saveData("THREE");
+                break;
+            case Constants.FRAGMENT_CALLBACK_LOAD_1:
+                mWorkspaceFragment.loadDataFromPref("ONE");
+                break;
+            case Constants.FRAGMENT_CALLBACK_LOAD_2:
+                mWorkspaceFragment.loadDataFromPref("TWO");
+                break;
+            case Constants.FRAGMENT_CALLBACK_LOAD_3:
+                mWorkspaceFragment.loadDataFromPref("THREE");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE:
+                if(Constants.STRING_HELLO_ACK == null) {
+                    Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                showMyDialog(new TestModeDialogFragment(mFragmentListener, Constants.STRING_HELLO_ACK), "TESTMODE");
                 break;
             case Constants.FRAGMENT_CALLBACK_SEND_MSG:
                 if(mService != null) {
@@ -451,77 +469,17 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                         sendMessageToDevice(trans);
                 }
                 break;
-            case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO:
-                 changeFragment(new PseudoFragment(mFragmentListener));
-                break;
-            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE:
-                if(Constants.STRING_HELLO_ACK == null) {
-                    Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                TestModeDialogFragment mTestModeDialogFragment = new TestModeDialogFragment(mFragmentListener, Constants.STRING_HELLO_ACK);
-                mFragmentTransaction = mFragmentManager.beginTransaction();
-                mTestModeDialogFragment.show(mFragmentTransaction, "TEST MODE");
-                break;
             case Constants.FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH:
                 doScan();
                 break;
-//                // Receives BT state messages from service
-//                // and updates BT state UI
-//                case Constants.MESSAGE_BT_STATE_INITIALIZED:
-//                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                            getResources().getString(R.string.bt_state_init));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_invisible));
-//                    break;
-//                case Constants.MESSAGE_BT_STATE_LISTENING:
-//                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                            getResources().getString(R.string.bt_state_wait));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_invisible));
-//                    break;
-//                case Constants.MESSAGE_BT_STATE_CONNECTING:
-//                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                            getResources().getString(R.string.bt_state_connect));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_away));
-//                    break;
-//                case Constants.MESSAGE_BT_STATE_CONNECTED:
-//                    if(mService != null) {
-//                        String deviceName = mService.getDeviceName();
-//                        if(deviceName != null) {
-//                            mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                                    getResources().getString(R.string.bt_state_connected) + " " + deviceName);
-//                            mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_online));
-//                        } else {
-//                            mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                                    getResources().getString(R.string.bt_state_connected) + " no name");
-//                            mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_online));
-//                        }
-//                    }
-//                    break;
-//                case Constants.MESSAGE_BT_STATE_ERROR:
-//                    mTextStatus.setText(getResources().getString(R.string.bt_state_error));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_busy));
-//                    break;
-//
-//                // BT Command status
-//                case Constants.MESSAGE_CMD_ERROR_NOT_CONNECTED:
-//                    mTextStatus.setText(getResources().getString(R.string.bt_cmd_sending_error));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_busy));
-//                    break;
-//
-//                ///////////////////////////////////////////////
-//                // When there's incoming packets on bluetooth
-//                // do the UI works like below
-//                ///////////////////////////////////////////////
-//                case Constants.MESSAGE_READ_CHAT_DATA:
-////                    if(msg.obj != null) {
-////                        ExampleFragment frg = (ExampleFragment) mSectionsPagerAdapter.getItem(FragmentAdapter.FRAGMENT_POS_EXAMPLE);
-////                        frg.showMessage((String)msg.obj);
-////                    }
-//                    break;
-
             default:
                 break;
         }
+    }
+
+    private void showMyDialog(DialogFragment dialogFragment, String tag) {
+        mFragmentTransaction = mFragmentManager.beginTransaction();
+        dialogFragment.show(mFragmentTransaction, tag);
     }
 
     @Override
@@ -660,47 +618,19 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         public void handleMessage(Message msg)
         {
             switch(msg.what) {
-//                case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_INTRO:
-//                    changeFragment(new IntroFragment(mActivityHandler, mFragmentListener));
-//                    break;
-//                case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION:
-//                    changeFragment(new ConnectionFragment(mActivityHandler, mFragmentListener));
-//                    break;
-//                case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE:
-//                    changeFragment(mWorkspaceFragment);
-//                    break;
-//                case Constants.FRAGMENT_LISTENER_GET_FRAGMENT_INPUT:
-//                    String[] rcvStr = (String[]) msg.obj;
-//                    mWorkspaceFragment.inputDatas(rcvStr[0], rcvStr[1], rcvStr[2]);
-//                    break;
-
-                // Receives BT state messages from service
-                // and updates BT state UI
                 case Constants.HANDLER_ACTIVITY_RESEND_HELLO:
                     Logs.d("## Handler - Resend HELLO msg");
-//                    Toast.makeText(mContext, ":::Resend HELLO:::", Toast.LENGTH_SHORT).show();
                     sendMessageToDevice(Constants.COMMAND_HELLO);
                     break;
                 case Constants.MESSAGE_BT_STATE_INITIALIZED:
                     Logs.d(":::Service initialized:::");
                     Toast.makeText(mContext, ":::Service initialized:::", Toast.LENGTH_SHORT).show();
-                    //                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                            getResources().getString(R.string.bt_state_init));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_invisible));
                     break;
                 case Constants.MESSAGE_BT_STATE_LISTENING:
                     Logs.d(":::Service listening:::");
-//                    Toast.makeText(mContext, ":::Service istening:::", Toast.LENGTH_SHORT).show();
-//                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                            getResources().getString(R.string.bt_state_wait));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_invisible));
                     break;
                 case Constants.MESSAGE_BT_STATE_CONNECTING:
                     Logs.d(":::Service connecting:::");
-//                    Toast.makeText(mContext, ":::Service connecting:::", Toast.LENGTH_SHORT).show();
-//                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                            getResources().getString(R.string.bt_state_connect));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_away));
                     break;
                 case Constants.MESSAGE_BT_STATE_CONNECTED:
                     Logs.d(":::Service connected:::");
@@ -721,38 +651,19 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                         h2.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-//                                Constants.MODULE_NUM_STRING = Constants.RECEIVED_STRING;
-//                                numOfModules = Constants.RECEIVED_STRING;
-//                                if(str.split(":")[0].equals("NUM")) {
-//                                    Intent testIntent = new Intent(mContext, new TestModeActivity(str, mActivityHandler).getClass());
-//                                    startActivityForResult(testIntent, Constants.REQUEST_TEST_ACTIVITY);
-                                    //TODO call changeFragment in ActivityForResult()-"Constants.REQUEST_TEST_ACTIVITY"
                                     changeFragment(mWorkspaceFragment);
 //                                }
                             }
                         },2000);
-//                        if(deviceName != null) {
-//                            mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                                    getResources().getString(R.string.bt_state_connected) + " " + deviceName);
-//                            mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_online));
-//                        } else {
-//                            mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
-//                                    getResources().getString(R.string.bt_state_connected) + " no name");
-//                            mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_online));
-//                        }
                     }
                     break;
                 case Constants.MESSAGE_BT_STATE_ERROR:
                     Logs.d(":::Service error:::");
-//                    mTextStatus.setText(getResources().getString(R.string.bt_state_error));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_busy));
                     break;
 
                 // BT Command status
                 case Constants.MESSAGE_CMD_ERROR_NOT_CONNECTED:
                     Logs.d(":::Service not connected:::");
-//                    mTextStatus.setText(getResources().getString(R.string.bt_cmd_sending_error));
-//                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_busy));
                     break;
 
                 ///////////////////////////////////////////////
@@ -764,10 +675,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     if(msg.obj != null) {
                         Constants.RECEIVED_STRING = (String) msg.obj;
                     }
-//                    if(msg.obj != null) {
-//                        ExampleFragment frg = (ExampleFragment) mSectionsPagerAdapter.getItem(FragmentAdapter.FRAGMENT_POS_EXAMPLE);
-//                        frg.showMessage((String)msg.obj);
-//                    }
                     break;
 
                 default:
@@ -788,16 +695,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
             mFragmentTransaction.commit();
         }
     }
-
-//    public static WorkspaceFragment afterInput(String a, String b, String c) {
-//        WorkspaceFragment fragment = MainActivity.mWorkspaceFragment;
-//        Bundle args = new Bundle();
-//
-//        args.putString(Constants.INPUT_PARAM_1, a);
-//        args.putString(Constants.INPUT_PARAM_2, b);
-//        args.putString(Constants.INPUT_PARAM_2, c);
-//        return fragment;
-//    }
 
     /**
      * Auto-refresh Timer
@@ -847,6 +744,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         menu.add(R.id.menu_test, R.id.menu_test, Menu.NONE, "테스트모드");
         menu.add(R.id.menu_save, R.id.menu_save, Menu.NONE, "저장");
         menu.add(R.id.menu_load, R.id.menu_load, Menu.NONE, "불러오기");
+        menu.add(R.id.menu_initalize, R.id.menu_initalize, Menu.NONE, "초기화");
     }
 
     @Override
@@ -860,8 +758,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_trans: //send message
-//                String trans = mWorkspaceFragment.MakeTransStr(0);
-//                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO, 0);
                 onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SEND, 0);
                 return true;
             case R.id.menu_start:
@@ -876,14 +772,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     sendMessageToDevice(Constants.COMMAND_STOP);
                 }
                 break;
-            case R.id.menu_pseudo:
-                String koreanLang = mWorkspaceFragment.translateToKoreaPseudoCode();
-//                Intent pseudosIntent = new Intent(mContext, PseudoActivity.class);
-                //startActivityforResult(pseudosIntent, Constants.REQUEST_ACTIVITY_PSEUDO);
-                changeFragment(new PseudoFragment(mFragmentListener));
-                break;
             case R.id.menu_modulenum:
-//                String s = Constants.MODULE_NUM_STRING;
                 if(Constants.STRING_HELLO_ACK == null) {
                     Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
                     break;
@@ -902,18 +791,20 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     break;
                 }
                 onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE, 0);
-
-//                TestModeActivity testModeActivity = new TestModeActivity(numOfModules, mActivityHandler);
-//                Intent testIntent = new Intent(mContext, testModeActivity.getClass());
-//                startActivityForResult(testIntent, Constants.REQUEST_ACTIVITY_TEST);
                 break;
             case R.id.menu_save:
-                Toast.makeText(mContext, "save", Toast.LENGTH_SHORT).show();
-                mWorkspaceFragment.saveData();
+                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SAVE, 0);
+//                Toast.makeText(mContext, "save", Toast.LENGTH_SHORT).show();
+//                mWorkspaceFragment.saveData();
                 break;
             case R.id.menu_load:
-                Toast.makeText(mContext, "load", Toast.LENGTH_SHORT).show();
-                mWorkspaceFragment.loadDataFromPref();
+                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_LOAD, 0);
+//                Toast.makeText(mContext, "load", Toast.LENGTH_SHORT).show();
+//                mWorkspaceFragment.loadDataFromPref();
+                break;
+            case R.id.menu_initalize:
+                mWorkspaceFragment = new WorkspaceFragment(mContext, mActivityHandler, mFragmentListener);
+                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE, 0);
                 break;
             default:
                 break;

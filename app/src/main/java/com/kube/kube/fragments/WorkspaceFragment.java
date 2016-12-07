@@ -175,7 +175,7 @@ public class WorkspaceFragment extends Fragment {
         if(mWorkspaceAdapter.BlockList != null) {
             mBlockList = mWorkspaceAdapter.BlockList;
             MakeTransStr mMakeTrans = new MakeTransStr(mBlockList, mContext);
-            String result = mMakeTrans.transPseudo(0);
+            String result = mMakeTrans.translateByKorean(0);
             return result;
         }
         else return "Error : Blocklist is empty";
@@ -274,19 +274,23 @@ public class WorkspaceFragment extends Fragment {
         return image;
     }
 
-    public void saveData(){
+    public void saveData(String where){
         mPrefs = mContext.getSharedPreferences("mPrefs", MODE_PRIVATE);
         SharedPreferences.Editor e = mPrefs.edit();
+        mBlockList = mWorkspaceAdapter.BlockList;
         String Db = gson.toJson(mBlockList);
-        e.putString("DB", Db);
+        Log.d("####DB     ",Db);
+        e.putString(where, Db);
         e.commit();
     }
-    public void loadDataFromPref(){
+    public void loadDataFromPref(String where){
         mPrefs = mContext.getSharedPreferences("mPrefs", MODE_PRIVATE);
-        String json = mPrefs.getString("DB", "");
+        String json = mPrefs.getString(where, "");
+        Log.d("####json     ",json);
         if(!"".equals(json)){
             TypeToken<ArrayList<WorkspaceItem>> token = new TypeToken<ArrayList<WorkspaceItem>>(){};
             mBlockList = gson.fromJson(json, token.getType());
+            mWorkspaceAdapter.BlockList = mBlockList;
             mWorkspaceAdapter.notifyDataSetChanged();
         }
     }

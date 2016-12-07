@@ -41,12 +41,20 @@ public class Constants {
     public static final int FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION = 1001;
     public static final int FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE = 1002;
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT =  1006;
-    public static final int FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO = 1007;
+//    public static final int FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO = 1007;
     public static final int FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH = 1003;
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE = 1008;
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_SEND = 1009;
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP = 1010;
     public static final int FRAGMENT_CALLBACK_SEND_MSG = 1011;
+    public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_SAVE = 1012;
+    public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_LOAD = 1013;
+    public static final int FRAGMENT_CALLBACK_SAVE_1 = 1014;
+    public static final int FRAGMENT_CALLBACK_SAVE_2 = 1015;
+    public static final int FRAGMENT_CALLBACK_SAVE_3 = 1016;
+    public static final int FRAGMENT_CALLBACK_LOAD_1 = 1017;
+    public static final int FRAGMENT_CALLBACK_LOAD_2 = 1018;
+    public static final int FRAGMENT_CALLBACK_LOAD_3 = 1019;
 //    public static final int FRAGMENT_LISTENER_GET_FRAGMENT_INPUT = 1022;
 
 
@@ -101,6 +109,9 @@ public class Constants {
 
     public static String OPTION_BLOCK = null;
     public static String NUM_OPTION = null;
+
+    public static String[] SAVED_WORKSPACE = new String[3];
+
 //    public static String MODULE_NUM = null;
 
 }

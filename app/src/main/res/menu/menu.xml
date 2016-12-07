@@ -21,33 +21,34 @@
         app:showAsAction="never"
         android:orderInCategory="3"/>
 
-    <item
-        android:id="@+id/menu_pseudo"
-        app:showAsAction = "never"
-        android:orderInCategory="4"
-        android:title="psuedo" />
 
     <item
         android:title="modules"
         app:showAsAction = "never"
         android:id="@+id/menu_modulenum"
-        android:orderInCategory="5"/>
+        android:orderInCategory="4"/>
 
     <item
         android:title="test"
         android:id="@+id/menu_test"
         app:showAsAction="never"
-        android:orderInCategory="6"/>
+        android:orderInCategory="5"/>
 
     <item
         android:title="save"
         android:id="@+id/menu_save"
         app:showAsAction="never"
-        android:orderInCategory="7"/>
+        android:orderInCategory="6"/>
 
     <item
         android:title="load"
         android:id="@+id/menu_load"
+        app:showAsAction="never"
+        android:orderInCategory="7"/>
+
+    <item
+        android:title="initialize"
+        android:id="@+id/menu_initalize"
         app:showAsAction="never"
         android:orderInCategory="8"/>
 
