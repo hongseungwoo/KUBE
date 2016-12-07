@@ -175,6 +175,7 @@ public class InputDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 optionBlock = (String) blockImg.getTag();
+
                 if(numEdit.getText().toString().length() == 0|| moduleEdit.getText().toString().length() == 0){
                     Toast.makeText(getActivity().getApplicationContext(), "빈 항목이 있습니다.", Toast.LENGTH_SHORT).show();
                 }else {
