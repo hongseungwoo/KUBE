@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">KUBE_TEST</string>
+    <string name="app_name">KUBE</string>
     <string name="service_name">BLE Chat Service</string>
 
     <!-- Settings -->
