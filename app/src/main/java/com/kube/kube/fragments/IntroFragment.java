@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.kube.kube.R;
@@ -34,7 +35,7 @@ public class IntroFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_intro, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_intro, container, false);
 
         ////
 
@@ -64,8 +65,22 @@ public class IntroFragment extends Fragment {
                 @Override
                 public void onAnimationEnd(Animation animation) {
 //                    overridePendingTransition(0, R.anim.fade_out);
-                    mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_CONNECTION, 0);
-
+                    Button btn_conntect_blu = (Button) rootView.findViewById(R.id.button_connection_blutooth);
+                    Button btn_workspace = (Button) rootView.findViewById(R.id.button_workspace);
+                    btn_conntect_blu.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH, 0);
+                        }
+                    });
+                    btn_workspace.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_WORKSPACE, 0);
+                        }
+                    });
+                    btn_conntect_blu.setVisibility(View.VISIBLE);
+                    btn_workspace.setVisibility(View.VISIBLE);
                 }
 
                 @Override

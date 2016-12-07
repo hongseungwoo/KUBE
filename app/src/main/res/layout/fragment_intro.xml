@@ -25,9 +25,10 @@
 
 
     <LinearLayout
+        android:layout_marginTop="100dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_margin="10dp"
@@ -69,4 +70,22 @@
             android:layout_gravity="center"
             android:layout_weight="1" />
     </LinearLayout>
+
+    <Button
+        android:layout_marginTop="120dp"
+        android:id="@+id/button_connection_blutooth"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="블루투스 연결"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+    <Button
+        android:id="@+id/button_workspace"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Workspace"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+
 </LinearLayout>

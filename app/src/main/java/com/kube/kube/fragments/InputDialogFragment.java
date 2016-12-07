@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kube.kube.MainActivity;
 import com.kube.kube.R;
@@ -174,11 +175,18 @@ public class InputDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 optionBlock = (String) blockImg.getTag();
-                numOption = inequalImg.getTag() + numEdit.getText().toString();
-                moduleNum = moduleEdit.getText().toString();
-                String[] sendingStr = {optionBlock, numOption, moduleNum};
+                if(numEdit.getText().toString().length() == 0|| moduleEdit.getText().toString().length() == 0){
+                    Toast.makeText(getActivity().getApplicationContext(), "빈 항목이 있습니다.", Toast.LENGTH_SHORT).show();
+                }else {
+                    numOption = inequalImg.getTag() + numEdit.getText().toString();
+                    moduleNum = moduleEdit.getText().toString();
+                    String[] sendingStr = {optionBlock, numOption, moduleNum};
+                    mFragmentListener.onInputFragmentCallBack(sendingStr);
+                    dismiss();
+                }
+
 //                mActivityHandler.obtainMessage(Constants.FRAGMENT_LISTENER_GET_FRAGMENT_INPUT, sendingStr);
-                mFragmentListener.onInputFragmentCallBack(sendingStr);
+
 //                mInputFragmentListener.onInputFragmentCallBack(sendingStr);
 //                String optionBlcok = (String) blockImg.getTag();
 //                String numOption = (String)inequalImg.getTag() + numEdit.getText().toString();
@@ -190,7 +198,7 @@ public class InputDialogFragment extends DialogFragment {
 //                intent.putExtra("moduleNum", moduleNum);
 //                setResult(RESULT_OK, intent);
 //                setResult(2, intent);
-                dismiss();
+
             }
         });
 

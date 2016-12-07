@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -16,12 +17,15 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kube.kube.R;
 import com.kube.kube.utils.Constants;
 import com.kube.kube.workspace.WorkspaceAdapter;
 import com.kube.kube.workspace.WorkspaceItem;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class WorkspaceFragment extends Fragment {
 
@@ -252,6 +256,24 @@ public class WorkspaceFragment extends Fragment {
                 break;
         }
         return image;
+    }
+
+    public void saveData(){
+        mPrefs = mContext.getSharedPreferences("mPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor e = mPrefs.edit();
+        Db = gson.toJson(mBlockList);
+        e.putString("DB", Db);
+        e.commit();
+    }
+    public void loadDataFromPref(){
+        mPrefs = mContext.getSharedPreferences("mPrefs", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = mPrefs.getString("DB", "");
+        if(!"".equals(json)){
+            TypeToken<ArrayList<WorkspaceItem>> token = new TypeToken<ArrayList<WorkspaceItem>>(){};
+            mBlockList = gson.fromJson(json, token.getType());
+            notifyDataSetChanged();
+        }
     }
 
 }
