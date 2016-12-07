@@ -60,6 +60,11 @@ public class MakeTransStr {
         return new String(sb);
     }
 
+    public String translateByKorean(int start) {
+        initialize();
+        return transPseudo(start);
+    }
+
     /**
      *
      * @param start cursor where to start translating
@@ -447,5 +452,78 @@ public class MakeTransStr {
 //        }
 
         return new String(mBuilder);
+    }
+
+    public String transPseudo(int start){
+        String pseudoStr = "";
+        boolean checkEnd = false;
+        for(int i = start;i < blockList.size();i+=5){
+            if(checkEnd == true)
+                break;
+            int block = blockList.get(i).getBlockImage();
+            switch (block) {
+                case R.drawable.start:
+                    pseudoStr += "작동을 시작합니다.\n";
+                    break;
+
+                case R.drawable.up_to_right:
+                    pseudoStr+=transPseudo(i+1);
+                    break;
+
+                case R.drawable.whileblock:
+                    if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
+                        pseudoStr += " 적외선 센서 " + blockList.get(i).getModuleNum() + "의 값이 " + blockList.get(i).getNumOption() + "일 동안\n";
+                    } else {
+                        pseudoStr += " 초음파 센서 " + blockList.get(i).getModuleNum() + "의 값이 " + blockList.get(i).getNumOption() + "일 동안\n";
+                    }
+                    break;
+                case R.drawable.whileendblock:
+                    pseudoStr += "동작합니다.\n";
+                    checkEnd=true;
+                    break;
+                case R.drawable.ifblock:
+                    if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
+                        pseudoStr += " 만약에 적외선 센서 " + blockList.get(i).getModuleNum() + "의 값이 " + blockList.get(i).getNumOption() + "이면\n";
+                    } else {
+                        pseudoStr += " 만약에 초음파 센서 " + blockList.get(i).getModuleNum() + "의 값이 " + blockList.get(i).getNumOption() + "이면\n";
+                    }
+                    break;
+                case R.drawable.ifendblock:
+                    pseudoStr += "동작합니다.\n";
+                    checkEnd=true;
+                    break;
+                case R.drawable.mainmotorblcok:
+                    pseudoStr += "메인 모터 " + blockList.get(i).getModuleNum() + "이(가)";
+                    if (blockList.get(i).optionImage == R.drawable.right)
+                        pseudoStr += "시계 방향으로 " + blockList.get(i).getNumOption() + "속도로 ";
+                    else
+                        pseudoStr += "반시계 방향으로 " + blockList.get(i).getNumOption() + "속도로 ";
+                    break;
+                case R.drawable.submotorblcok:
+                    pseudoStr += "서브 모터 " + blockList.get(i).getModuleNum() + "이(가)" + blockList.get(i).getNumOption() + "도 만큼 ";
+                    break;
+                case R.drawable.ledblock:
+                    pseudoStr += "LED " + blockList.get(i).getModuleNum() + "이(가) ";
+                    if (blockList.get(i).optionImage == R.drawable.red) {
+                        pseudoStr += "빨강색으로 " + blockList.get(i).getNumOption() + "밝기로 ";
+                    } else if (blockList.get(i).optionImage == R.drawable.green) {
+                        pseudoStr += "녹색으로 " + blockList.get(i).getNumOption() + "밝기로 ";
+                    } else if (blockList.get(i).optionImage == R.drawable.blue) {
+                        pseudoStr += "파랑색으로 " + blockList.get(i).getNumOption() + "밝기로 ";
+                    } else if (blockList.get(i).optionImage == R.drawable.yellow) {
+                        pseudoStr += "노랑색으로 " + blockList.get(i).getNumOption() + "밝기로 ";
+                    } else if (blockList.get(i).optionImage == R.drawable.violet) {
+                        pseudoStr += "보라색으로 " + blockList.get(i).getNumOption() + "밝기로 ";
+                    } else if (blockList.get(i).optionImage == R.drawable.sky) {
+                        pseudoStr += "하늘색으로 " + blockList.get(i).getNumOption() + "밝기로 ";
+                    }
+                    break;
+                case R.drawable.end:
+                    checkEnd = true;
+                    pseudoStr+= "작동을 멈춥니다.\n";
+                    break;
+            }
+        }
+        return pseudoStr;
     }
 }

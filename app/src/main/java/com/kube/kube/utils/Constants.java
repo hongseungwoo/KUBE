@@ -44,6 +44,9 @@ public class Constants {
     public static final int FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO = 1007;
     public static final int FRAGMENT_CALLBACK_START_FINDING_BLUETOOTH = 1003;
     public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE = 1008;
+    public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_SEND = 1009;
+    public static final int FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP = 1010;
+    public static final int FRAGMENT_CALLBACK_SEND_MSG = 1011;
 //    public static final int FRAGMENT_LISTENER_GET_FRAGMENT_INPUT = 1022;
 
 

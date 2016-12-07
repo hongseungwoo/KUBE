@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 
 import com.kube.kube.R;
@@ -34,6 +35,7 @@ public class TestModeDialogFragment extends DialogFragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_testmode, container, false);
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         StringBuilder builder = new StringBuilder();
         builder.append(getStr.charAt(6));

@@ -20,6 +20,8 @@
         android:layout_rowSpan="2"
         android:id="@+id/optionImageView"/>
     <TextView
+        android:layout_width="145dp"
+        android:layout_height="20dp"
         android:id="@+id/moduleNumTextView"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="5dp"
@@ -70,6 +72,7 @@
         android:layout_marginBottom="15dp"
         android:layout_width="80dp"
         android:layout_column="1" />
+
     <Button
         android:id="@+id/cancelButton"
         android:text="Cancel"

@@ -29,26 +29,27 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class WorkspaceFragment extends Fragment {
 
-    View rootView = null;
+    private View rootView = null;
 
-    Context mContext = null;
-    Handler mHandler = null;
-    OnFragmentListener mFragmentListener = null;
+    private Context mContext = null;
+    private Handler mHandler = null;
+    private OnFragmentListener mFragmentListener = null;
 
-    ImageView startBlockImage;
-    ImageView endBlockImage;
-    ImageView whileBlockImage;
-    ImageView whileEndBlockImage;
-    ImageView ifBlockImage;
-    ImageView ifEndBlockImage;
-    ImageView sleepBlockImage;
-    ImageView mainMotorBlockImage;
-    ImageView subMotorBlockImage;
-    ImageView ledBlockImage;
-    WorkspaceAdapter mWorkspaceAdapter;
+    private ImageView startBlockImage;
+    private ImageView endBlockImage;
+    private ImageView whileBlockImage;
+    private ImageView whileEndBlockImage;
+    private ImageView ifBlockImage;
+    private ImageView ifEndBlockImage;
+    private ImageView sleepBlockImage;
+    private ImageView mainMotorBlockImage;
+    private ImageView subMotorBlockImage;
+    private ImageView ledBlockImage;
+    private WorkspaceAdapter mWorkspaceAdapter;
 
-    Gson gson;
-    String DB;
+    private Gson gson;
+    private String DB;
+    private SharedPreferences mPrefs;
 
     ArrayList<WorkspaceItem> mBlockList;
 
@@ -74,6 +75,8 @@ public class WorkspaceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if(rootView == null) {
             rootView = inflater.inflate(R.layout.fragment_workspace, container, false);
+
+            gson = new Gson();
 
             startBlockImage = (ImageView) rootView.findViewById(R.id.startBlock);
             endBlockImage = (ImageView) rootView.findViewById(R.id.endBlock);
@@ -120,7 +123,10 @@ public class WorkspaceFragment extends Fragment {
                             clickBlock != R.drawable.up_to_right) {
                         curPos = position;
                         Log.d("clickBlock", "     " + clickBlock + "    " + curPos);
-                        mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT, clickBlock);
+                        if(clickBlock == R.drawable.sleep) {
+                            mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP, clickBlock);
+                        } else
+                            mFragmentListener.onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT, clickBlock);
                     }
                 }
             });
@@ -160,6 +166,16 @@ public class WorkspaceFragment extends Fragment {
             MakeTransStr mMakeTrans = new MakeTransStr(mBlockList, mContext);
             String result = mMakeTrans.translate(0);
             Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
+            return result;
+        }
+        else return "Error : Blocklist is empty";
+    }
+
+    public String translateToKoreaPseudoCode() {
+        if(mWorkspaceAdapter.BlockList != null) {
+            mBlockList = mWorkspaceAdapter.BlockList;
+            MakeTransStr mMakeTrans = new MakeTransStr(mBlockList, mContext);
+            String result = mMakeTrans.transPseudo(0);
             return result;
         }
         else return "Error : Blocklist is empty";
@@ -261,18 +277,17 @@ public class WorkspaceFragment extends Fragment {
     public void saveData(){
         mPrefs = mContext.getSharedPreferences("mPrefs", MODE_PRIVATE);
         SharedPreferences.Editor e = mPrefs.edit();
-        Db = gson.toJson(mBlockList);
+        String Db = gson.toJson(mBlockList);
         e.putString("DB", Db);
         e.commit();
     }
     public void loadDataFromPref(){
         mPrefs = mContext.getSharedPreferences("mPrefs", MODE_PRIVATE);
-        Gson gson = new Gson();
         String json = mPrefs.getString("DB", "");
         if(!"".equals(json)){
             TypeToken<ArrayList<WorkspaceItem>> token = new TypeToken<ArrayList<WorkspaceItem>>(){};
             mBlockList = gson.fromJson(json, token.getType());
-            notifyDataSetChanged();
+            mWorkspaceAdapter.notifyDataSetChanged();
         }
     }
 

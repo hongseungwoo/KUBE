@@ -39,6 +39,18 @@
         app:showAsAction="never"
         android:orderInCategory="6"/>
 
+    <item
+        android:title="save"
+        android:id="@+id/menu_save"
+        app:showAsAction="never"
+        android:orderInCategory="7"/>
+
+    <item
+        android:title="load"
+        android:id="@+id/menu_load"
+        app:showAsAction="never"
+        android:orderInCategory="8"/>
+
 
 
 </menu>

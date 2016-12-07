@@ -46,25 +46,6 @@
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/whileblock"
-                android:id="@+id/whileBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/whileendblock"
-                android:id="@+id/whileEndBlock"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/submotorblcok"
@@ -93,6 +74,34 @@
                 android:layout_height="60dp"
                 android:layout_marginRight="10dp"
                 android:scaleType="fitXY"
+                android:src="@drawable/sleep"
+                android:id="@+id/sleepBlock"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/whileblock"
+                android:id="@+id/whileBlock"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/whileendblock"
+                android:id="@+id/whileEndBlock"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/ifblock"
                 android:id="@+id/ifBlock"
                 android:layout_weight="1" />
@@ -106,14 +115,6 @@
                 android:id="@+id/ifEndBlock"
                 android:layout_weight="1" />
 
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/sleep"
-                android:id="@+id/sleepBlock"
-                android:layout_weight="1" />
         </LinearLayout>
     </HorizontalScrollView>
     <!--<Button-->

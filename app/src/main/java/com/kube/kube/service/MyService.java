@@ -276,7 +276,7 @@ public class MyService extends Service {
      */
     public void sendMessageToRemote(String message) {
         Logs.d("## SERVICE : send \"" + message + "\"");
-        Toast.makeText(mContext, "Send : " + message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, "Send : " + message, Toast.LENGTH_SHORT).show();
         sendMessageToDevice(message);
     }
 

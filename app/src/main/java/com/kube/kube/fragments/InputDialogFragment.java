@@ -51,15 +51,15 @@ public class InputDialogFragment extends DialogFragment {
         Button cancelBtn = (Button)rootView.findViewById(R.id.cancelButton);
 
         switch (mClickBlock){
-            case R.drawable.sleep:
-                blockImg.setImageResource(R.drawable.empty);
-                blockImg.setTag("EMPTY");
-                blockImg.setVisibility(View.INVISIBLE);
-                moduleEdit.setEnabled(false);
-                inequalImg.setVisibility(View.INVISIBLE);
-                numEdit.setHint("0-99");
-                unitText.setText("초");
-                break;
+//            case R.drawable.sleep:
+//                blockImg.setImageResource(R.drawable.empty);
+//                blockImg.setTag("EMPTY");
+//                blockImg.setVisibility(View.INVISIBLE);
+//                moduleEdit.setEnabled(false);
+//                inequalImg.setVisibility(View.INVISIBLE);
+//                numEdit.setHint("0-99");
+//                unitText.setText("초");
+//                break;
             case R.drawable.submotorblcok:
                 blockImg.setVisibility(View.INVISIBLE);
                 blockImg.setTag("EMPTY");

@@ -26,9 +26,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.kube.kube.fragments.ConnectionFragment;
+import com.kube.kube.fragments.InputSleepDialogFragment;
 import com.kube.kube.fragments.IntroFragment;
 import com.kube.kube.fragments.OnFragmentListener;
 import com.kube.kube.fragments.PseudoFragment;
+import com.kube.kube.fragments.SendDialogFragment;
 import com.kube.kube.fragments.TestModeDialogFragment;
 import com.kube.kube.fragments.WorkspaceFragment;
 import com.kube.kube.service.MyService;
@@ -78,6 +80,8 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
 
     private String numOfModules;
 
+    private String trans;
+
 
     /*****************************************************
      *	 Overrided methods
@@ -107,7 +111,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         mFragmentManager = getFragmentManager();
         changeFragment(new IntroFragment(mActivityHandler, this));
 
-        mWorkspaceFragment = new WorkspaceFragment(getApplicationContext(), mActivityHandler, this);
+        mWorkspaceFragment = new WorkspaceFragment(mContext, mActivityHandler, this);
 //        mWorkspaceFragment = new WorkspaceFragment(getApplicationContext(), mActivityHandler, this, mWorkspaceAdapter);
 
 //        mSectionsPagerAdapter = new FragmentAdapter(mFragmentManager, mContext, this, mActivityHandler);
@@ -150,7 +154,6 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
     @Override
     public synchronized void onPause() {
         super.onPause();
-
     }
 
     @Override
@@ -427,6 +430,27 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 mInputDialogFragment.show(mFragmentTransaction, "INPUT");
 // changeFragment(new InputDialogFragment(mActivityHandler, , clickedBlock));
                 break;
+            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SEND:
+                trans = mWorkspaceFragment.translateToModuleLanguage();
+                String pseudo = mWorkspaceFragment.translateToKoreaPseudoCode();
+
+                SendDialogFragment mSendDialogFragment = new SendDialogFragment(mFragmentListener);
+                mSendDialogFragment.setTrans(trans, pseudo);
+                mFragmentTransaction = mFragmentManager.beginTransaction();
+                mSendDialogFragment.show(mFragmentTransaction, "SEND");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP:
+                InputSleepDialogFragment mSleepDialogFragment = new InputSleepDialogFragment(mFragmentListener);
+                mFragmentTransaction = mFragmentManager.beginTransaction();
+                mSleepDialogFragment.show(mFragmentTransaction, "SLEEPINPUT");
+                break;
+            case Constants.FRAGMENT_CALLBACK_SEND_MSG:
+                if(mService != null) {
+                    trans = mWorkspaceFragment.translateToModuleLanguage();
+                    if(trans != null)
+                        sendMessageToDevice(trans);
+                }
+                break;
             case Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO:
                  changeFragment(new PseudoFragment(mFragmentListener));
                 break;
@@ -654,6 +678,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 // and updates BT state UI
                 case Constants.HANDLER_ACTIVITY_RESEND_HELLO:
                     Logs.d("## Handler - Resend HELLO msg");
+//                    Toast.makeText(mContext, ":::Resend HELLO:::", Toast.LENGTH_SHORT).show();
                     sendMessageToDevice(Constants.COMMAND_HELLO);
                     break;
                 case Constants.MESSAGE_BT_STATE_INITIALIZED:
@@ -665,14 +690,14 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     break;
                 case Constants.MESSAGE_BT_STATE_LISTENING:
                     Logs.d(":::Service listening:::");
-                    Toast.makeText(mContext, ":::Service istening:::", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, ":::Service istening:::", Toast.LENGTH_SHORT).show();
 //                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
 //                            getResources().getString(R.string.bt_state_wait));
 //                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_invisible));
                     break;
                 case Constants.MESSAGE_BT_STATE_CONNECTING:
                     Logs.d(":::Service connecting:::");
-                    Toast.makeText(mContext, ":::Service connecting:::", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, ":::Service connecting:::", Toast.LENGTH_SHORT).show();
 //                    mTextStatus.setText(getResources().getString(R.string.bt_title) + ": " +
 //                            getResources().getString(R.string.bt_state_connect));
 //                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_away));
@@ -718,7 +743,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     }
                     break;
                 case Constants.MESSAGE_BT_STATE_ERROR:
-                    Logs.d(":::Service connected:::");
+                    Logs.d(":::Service error:::");
 //                    mTextStatus.setText(getResources().getString(R.string.bt_state_error));
 //                    mImageBT.setImageDrawable(getResources().getDrawable(android.R.drawable.presence_busy));
                     break;
@@ -818,9 +843,10 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         menu.add(R.id.menu_trans, R.id.menu_trans, Menu.NONE, "전송");
         menu.add(R.id.menu_start, R.id.menu_start, Menu.NONE, "시작");
         menu.add(R.id.menu_stop, R.id.menu_stop, Menu.NONE, "중지");
-        menu.add(R.id.menu_pseudo, R.id.menu_pseudo, Menu.NONE, "수도 코드");
         menu.add(R.id.menu_modulenum, R.id.menu_modulenum, Menu.NONE, "모듈 개수");
         menu.add(R.id.menu_test, R.id.menu_test, Menu.NONE, "테스트모드");
+        menu.add(R.id.menu_save, R.id.menu_save, Menu.NONE, "저장");
+        menu.add(R.id.menu_load, R.id.menu_load, Menu.NONE, "불러오기");
     }
 
     @Override
@@ -835,11 +861,8 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         switch (item.getItemId()) {
             case R.id.menu_trans: //send message
 //                String trans = mWorkspaceFragment.MakeTransStr(0);
-
-                String trans = mWorkspaceFragment.translateToModuleLanguage();
-                if(mService != null && trans != null)
-                    sendMessageToDevice(trans);
-                Logs.d("##", ""+trans);
+//                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_CHANGE_FRAGMENT_PSUDO, 0);
+                onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SEND, 0);
                 return true;
             case R.id.menu_start:
                 Logs.d("# menu_start");
@@ -854,6 +877,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 }
                 break;
             case R.id.menu_pseudo:
+                String koreanLang = mWorkspaceFragment.translateToKoreaPseudoCode();
 //                Intent pseudosIntent = new Intent(mContext, PseudoActivity.class);
                 //startActivityforResult(pseudosIntent, Constants.REQUEST_ACTIVITY_PSEUDO);
                 changeFragment(new PseudoFragment(mFragmentListener));
@@ -882,6 +906,14 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
 //                TestModeActivity testModeActivity = new TestModeActivity(numOfModules, mActivityHandler);
 //                Intent testIntent = new Intent(mContext, testModeActivity.getClass());
 //                startActivityForResult(testIntent, Constants.REQUEST_ACTIVITY_TEST);
+                break;
+            case R.id.menu_save:
+                Toast.makeText(mContext, "save", Toast.LENGTH_SHORT).show();
+                mWorkspaceFragment.saveData();
+                break;
+            case R.id.menu_load:
+                Toast.makeText(mContext, "load", Toast.LENGTH_SHORT).show();
+                mWorkspaceFragment.loadDataFromPref();
                 break;
             default:
                 break;
