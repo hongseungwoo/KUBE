@@ -22,9 +22,11 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.kube.kube.fragments.InputSleepDialogFragment;
 import com.kube.kube.fragments.IntroFragment;
 import com.kube.kube.fragments.LoadDialogFragment;
 import com.kube.kube.fragments.OnFragmentListener;
@@ -80,6 +82,8 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
 
     private String trans;
 
+    private Menu mMenu;
+
 
     /*****************************************************
      *	 Overrided methods
@@ -102,7 +106,9 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
 
         // Create the adapter that will return a fragment for each of the primary sections of the app.
 
-        //TODD
+        //TODO
+
+
 
         mFragmentListener = this;
 
@@ -421,7 +427,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 showMyDialog(new InputDialogFragment(mFragmentListener, clickedBlock), "INPUT");
                 break;
             case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_INPUT_SLEEP:
-                showMyDialog(new TestModeDialogFragment(mFragmentListener, Constants.STRING_HELLO_ACK), "SLEEPINPUT");
+                showMyDialog(new InputSleepDialogFragment(mFragmentListener), "SLEEPINPUT");
                 break;
             case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_SAVE:
                 showMyDialog(new SaveDialogFragment(mFragmentListener), "SAVE");
@@ -457,7 +463,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 break;
             case Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE:
                 if(Constants.STRING_HELLO_ACK == null) {
-                    Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "모듈 개수 값이 없습니다. 재연결하세요.", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 showMyDialog(new TestModeDialogFragment(mFragmentListener, Constants.STRING_HELLO_ACK), "TESTMODE");
@@ -634,7 +640,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                     break;
                 case Constants.MESSAGE_BT_STATE_CONNECTED:
                     Logs.d(":::Service connected:::");
-                    Toast.makeText(mContext, ":::Service connected.:::", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, ":::connected:::", Toast.LENGTH_SHORT).show();
                     if(mService != null) {
                         String deviceName = mService.getDeviceName();
 
@@ -715,7 +721,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
         if(message == null || message.length() < 1) return;
 
         Logs.d("# sendMessage - SEND : " + message);
-        Toast.makeText(mContext, "SEND : " + message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, "SEND : " + message, Toast.LENGTH_SHORT).show();
         if(mService != null) {
             if(message.charAt(0) == '#') { // if message is the translated language
                 for (int i = 0; i < message.length(); i += 20) {
@@ -731,10 +737,21 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
     }
 
 
+
     /**
      *
      * //TODO menu
      */
+
+
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        menu.setGroupVisible(0, false);
+        return true;
+    }
+
     private void addOptionMenuItems(Menu menu) {
         menu.clear();
         menu.add(R.id.menu_trans, R.id.menu_trans, Menu.NONE, "전송");
@@ -774,7 +791,7 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                 break;
             case R.id.menu_modulenum:
                 if(Constants.STRING_HELLO_ACK == null) {
-                    Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "모듈 개수 값이 없습니다. 재연결하세요.", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 String s = Constants.STRING_HELLO_ACK;
@@ -783,13 +800,9 @@ public class MainActivity extends FragmentActivity implements OnFragmentListener
                         " SM : " + s.charAt(9) +
                         " LD : " + s.charAt(12) +
                         " IR : " + s.charAt(15) +
-                        " SM : " + s.charAt(18), Toast.LENGTH_LONG).show();
+                        " US : " + s.charAt(18), Toast.LENGTH_LONG).show();
                 break;
             case R.id.menu_test:
-                if(Constants.STRING_HELLO_ACK == null) {
-                    Toast.makeText(mContext, "Error : no value of numOfModules", Toast.LENGTH_SHORT).show();
-                    break;
-                }
                 onFragmentCallBack(Constants.FRAGMENT_CALLBACK_SHOW_DIALOG_TESTMODE, 0);
                 break;
             case R.id.menu_save:

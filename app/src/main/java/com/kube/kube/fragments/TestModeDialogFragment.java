@@ -25,7 +25,7 @@ public class TestModeDialogFragment extends DialogFragment implements View.OnCli
     Button[] irImg;
     Button[] usImg;
 
-    String getStr = "NUM:DC5SM0LD3IR4US1\n"; // for test
+    String getStr = "NUM:DC0SM0LD0IR0US0\n"; // for test
 
     public TestModeDialogFragment(OnFragmentListener mFragmentListener, String getStr) {
         this.mFragmentListener = mFragmentListener;

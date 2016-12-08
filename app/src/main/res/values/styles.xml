@@ -118,7 +118,7 @@
 
         <style name="AppTheme.FormButton">
             <item name ="android:textSize">12sp</item>
-            <item name="android:textColor">#EFEFEF</item>
+            <item name="android:textColor">#dfbb80</item>
             <item name="android:includeFontPadding">false</item>
             <item name="android:layout_margin">4dip</item>
             <item name ="android:padding">0dip</item>
@@ -127,7 +127,7 @@
 
         <style name="AppTheme.FormURLButton">
             <item name ="android:textSize">12sp</item>
-            <item name="android:textColor">#EFEFEF</item>
+            <item name="android:textColor">#dfbb80</item>
             <item name="android:includeFontPadding">false</item>
             <item name="android:layout_margin">4dip</item>
             <item name ="android:padding">0dip</item>

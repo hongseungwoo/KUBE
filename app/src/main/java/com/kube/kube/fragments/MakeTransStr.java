@@ -470,7 +470,7 @@ public class MakeTransStr {
             int block = blockList.get(i).getBlockImage();
             switch (block) {
                 case R.drawable.start:
-                    pseudoStr += "작동을 시작합니다.\n";
+                    pseudoStr += "프로그램을 시작합니다.\n";
                     break;
 
                 case R.drawable.up_to_right:
@@ -478,6 +478,7 @@ public class MakeTransStr {
                     break;
 
                 case R.drawable.whileblock:
+                    pseudoStr += "[while문]";
                     if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
                         pseudoStr += " 적외선 센서 " + blockList.get(i).getModuleNum() + "의 값이 " + blockList.get(i).getNumOption() + "일 동안 다음과 같은 동작을 수행합니다.\n";
                     } else {
@@ -485,10 +486,11 @@ public class MakeTransStr {
                     }
                     break;
                 case R.drawable.whileendblock:
-                    pseudoStr += "while문을 종료합니다.\n";
+                    pseudoStr += "[while문]을 종료합니다.\n";
                     checkEnd=true;
                     break;
                 case R.drawable.ifblock:
+                    pseudoStr +="[if문]";
                     if (blockList.get(i).getOptionImage() == R.drawable.infrared) {
                         pseudoStr += " 만약에 적외선 센서 " + blockList.get(i).getModuleNum() + "의 값이 " + blockList.get(i).getNumOption() + "이면 다음과 같은 동작을 수행합니다.\n";
                     } else {
@@ -496,7 +498,7 @@ public class MakeTransStr {
                     }
                     break;
                 case R.drawable.ifendblock:
-                    pseudoStr += "if문을 종료합니다.\n";
+                    pseudoStr += "[if문]을 종료합니다.\n";
                     checkEnd=true;
                     break;
                 case R.drawable.mainmotorblcok:
@@ -529,11 +531,11 @@ public class MakeTransStr {
                     }
                     break;
                 case R.drawable.sleep:
-                    pseudoStr += ""+blockList.get(i).getNumOption()+"동안 동작을 멈춥니다.\n";
+                    pseudoStr += ""+blockList.get(i).getNumOption()+"밀리초 동안 모든 동작을 유지합니다.\n";
                     break;
                 case R.drawable.end:
                     checkEnd = true;
-                    pseudoStr+= "모든 작동을 멈춥니다.\n";
+                    pseudoStr+= "프로그램을 종료합니다.\n";
                     break;
             }
         }

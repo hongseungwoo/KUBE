@@ -165,7 +165,7 @@ public class WorkspaceFragment extends Fragment {
             mBlockList = mWorkspaceAdapter.BlockList;
             MakeTransStr mMakeTrans = new MakeTransStr(mBlockList, mContext);
             String result = mMakeTrans.translate(0);
-            Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
+//            Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
             return result;
         }
         else return "Error : Blocklist is empty";
