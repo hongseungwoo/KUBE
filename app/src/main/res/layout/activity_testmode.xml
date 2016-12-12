@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="400dp"
-    android:layout_width="300dp"
+    android:layout_width="wrap_content"
     android:orientation="vertical"
     android:weightSum="1"
     android:layout_margin="7dp">
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="350dp"
         android:layout_height="match_parent"
         android:layout_weight="0.8">
 
@@ -28,8 +28,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="DC"
-                    android:textAlignment="center"
-                    android:background="#555555"/>
+                    android:textAlignment="center"/>
 
                 <Button
                     android:id="@+id/testmode_dcimg_1"
@@ -61,8 +60,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="SM"
-                    android:textAlignment="center"
-                    android:background="#555555"/>
+                    android:textAlignment="center"/>
 
                 <Button
                     android:id="@+id/testmode_smimg_1"
@@ -94,8 +92,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="LD"
-                    android:textAlignment="center"
-                    android:background="#555555"/>
+                    android:textAlignment="center"/>
 
                 <Button
                     android:id="@+id/testmode_ldimg_1"
@@ -127,8 +124,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="IR"
-                    android:textAlignment="center"
-                    android:background="#555555"/>
+                    android:textAlignment="center"/>
 
                 <Button
                     android:id="@+id/testmode_irimg_1"
@@ -160,9 +156,13 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:text="US"
-                    android:textAlignment="center"
-                    android:background="#555555"/>
+                    android:textAlignment="center"/>
 
+                <Button
+                    android:id="@+id/testmode_usimg_1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/ultrasonic"/>
                 <Button
                     android:id="@+id/testmode_usimg_2"
                     android:layout_width="50dp"
@@ -184,11 +184,6 @@
                     android:layout_height="50dp"
                     android:background="@drawable/ultrasonic"/>
 
-                <Button
-                    android:id="@+id/testmode_usimg_1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/ultrasonic"/>
 
             </GridLayout>
         </LinearLayout>
